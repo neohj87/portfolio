@@ -1,0 +1,287 @@
+<!doctype html>
+<title>맘세이프 기획기</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink:#16232F;
+    --paper:#F3F4F1;
+    --paper-raised:#FFFFFF;
+    --line:#DBDED7;
+    --muted:#5B6560;
+    --accent:#2B6E64;
+    --accent-strong:#1E4F48;
+    --accent-soft:#E4EDE9;
+    --gold:#A9782E;
+    --warn:#8A4A3D;
+    --warn-soft:#F3E6E2;
+    --shadow: 0 1px 2px rgba(22,35,47,.04), 0 8px 24px -12px rgba(22,35,47,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#EAEDE9; --paper:#111817; --paper-raised:#171F1E; --line:#293331;
+      --muted:#93A29B; --accent:#71C2B0; --accent-strong:#8FD3C3; --accent-soft:#1C2B28;
+      --gold:#D8AE5E; --warn:#D89685; --warn-soft:#2E211D;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#EAEDE9; --paper:#111817; --paper-raised:#171F1E; --line:#293331;
+    --muted:#93A29B; --accent:#71C2B0; --accent-strong:#8FD3C3; --accent-soft:#1C2B28;
+    --gold:#D8AE5E; --warn:#D89685; --warn-soft:#2E211D;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ color-scheme: light dark; }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'IBM Plex Sans KR', 'Noto Sans KR', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased; padding-block:64px;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding-inline:20px; }
+  h1,h2,h3{ font-family:'Source Serif 4', Georgia, serif; text-wrap:balance; margin:0; color:var(--ink); }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:18px; height:1px; background:var(--accent); display:inline-block; }
+  p{ line-height:1.75; color:var(--ink); }
+  .muted{ color:var(--muted); }
+
+  .masthead{ display:flex; flex-direction:column; gap:18px; padding-bottom:36px; margin-bottom:40px; border-bottom:1px solid var(--line); }
+  .masthead h1{ font-size:clamp(25px,4vw,36px); font-weight:600; line-height:1.3; }
+  .masthead .subtitle{ font-size:16px; color:var(--muted); max-width:58ch; }
+  .meta-row{ display:flex; flex-wrap:wrap; gap:10px 22px; font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--muted); }
+  .meta-row span b{ color:var(--ink); font-weight:500; }
+
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-bottom:56px; }
+  .stat{ background:var(--paper-raised); padding:18px 16px; display:flex; flex-direction:column; gap:6px; }
+  .stat .num{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; line-height:1.25; }
+  .stat .label{ font-size:12px; color:var(--muted); line-height:1.5; }
+  @media (max-width:600px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+
+  section{ margin-bottom:56px; }
+  .section-head{ display:flex; flex-direction:column; gap:8px; margin-bottom:24px; }
+  .section-head h2{ font-size:23px; font-weight:600; }
+  .section-head .sub{ font-size:14px; color:var(--muted); }
+  .review-link{
+    align-self:flex-start; display:inline-flex; align-items:center; gap:6px;
+    margin-top:4px; padding:9px 16px; border-radius:999px;
+    background:var(--accent); color:var(--paper-raised); text-decoration:none;
+    font-size:13px; font-weight:600; box-shadow:var(--shadow);
+  }
+  .review-link:hover{ background:var(--accent-strong); }
+  .review-link span{ font-size:13px; }
+
+  .moves{ display:flex; flex-direction:column; gap:16px; }
+  .move{ background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:22px 24px; box-shadow:var(--shadow); }
+  .move .move-tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; display:block; }
+  .move h3{ font-size:16.5px; font-weight:600; margin-bottom:8px; }
+  .move p{ font-size:14.5px; margin:0; color:var(--ink); }
+
+  .data-table-wrap{ overflow-x:auto; }
+  .data-table{ width:100%; border-collapse:collapse; font-size:13.5px; background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .data-table th, .data-table td{ padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  .data-table tr:last-child td{ border-bottom:none; }
+  .data-table th{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:500; background:var(--accent-soft); }
+  .data-table td.key{ font-weight:600; white-space:nowrap; }
+
+  .gallery{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:620px){ .gallery{ grid-template-columns:1fr; } }
+  figure{ margin:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+  figure img{ display:block; width:100%; height:auto; background:#fff; }
+  figure.dark img{ background:#0d1211; }
+  figcaption{ padding:10px 14px; font-size:12.5px; color:var(--muted); border-top:1px solid var(--line); font-family:'IBM Plex Mono', monospace; letter-spacing:.01em; }
+
+  .callout{ border-radius:12px; padding:18px 20px; font-size:14px; line-height:1.65; }
+  .callout.ok{ background:var(--accent-soft); color:var(--ink); border:1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+  .callout.warn{ background:var(--warn-soft); color:var(--ink); border:1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+  .callout b{ color:var(--accent-strong); }
+  .callout.warn b{ color:var(--warn); }
+
+  .revlist{ display:flex; flex-direction:column; border-left:2px solid var(--line); margin-left:6px; }
+  .rev{ position:relative; padding:0 0 22px 24px; }
+  .rev:last-child{ padding-bottom:0; }
+  .rev::before{ content:""; position:absolute; left:-6px; top:2px; width:10px; height:10px; border-radius:50%; background:var(--paper); border:2px solid var(--accent); }
+  .rev .v{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--accent); font-weight:500; margin-bottom:4px; }
+  .rev .t{ font-size:14px; color:var(--ink); line-height:1.6; max-width:58ch; }
+
+  .closing{ background:var(--accent-soft); border-radius:14px; padding:30px 28px; text-align:left; }
+  .closing p{ font-family:'Source Serif 4', serif; font-size:18px; line-height:1.75; color:var(--ink); margin:0; }
+  .closing p + p{ margin-top:14px; }
+  .closing .src{ display:block; margin-top:14px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); }
+
+  footer{ border-top:1px solid var(--line); padding-top:24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:13px; color:var(--muted); }
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="eyebrow">기획자 포트폴리오 · 해커톤</div>
+    <h1>고맙워요 (Mom's Safe) — 산모 위험관리 플랫폼 기획</h1>
+    <p class="subtitle">지역 분만 인프라 격차 문제에서 아이디어를 발안하고 5인 팀을 직접 구성,
+      요구정의부터 데이터 설계·서비스 흐름 설계까지 기획 전 과정을 단독으로 총괄한 기록.</p>
+    <div class="meta-row">
+      <span>유형 <b>공공 헬스케어 해커톤 (5인 팀)</b></span>
+      <span>역할 <b>기획총괄 · 아이디어 발안 · 팀 구성</b></span>
+      <span>팀 구성 <b>간호사 1 · 개발자 2 · 디자이너 1</b></span>
+      <span>결과 <b>서류 제출 완료 · 예선 미통과</b></span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num">5인</div>
+      <div class="label">본인이 발안하고 직접 구성한 팀</div>
+    </div>
+    <div class="stat">
+      <div class="num">9종</div>
+      <div class="label">단독 총괄 작성한 기획 산출물</div>
+    </div>
+    <div class="stat">
+      <div class="num">v3.1</div>
+      <div class="label">요구사항 변경을 반영한 기능정의서 개정 버전</div>
+    </div>
+    <div class="stat">
+      <div class="num">예선 미통과</div>
+      <div class="label">전 산출물 제출 완료, 결과는 예선 탈락</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">배경</div>
+      <h2>아이디어 발안과 팀 구성</h2>
+    </div>
+    <p>지역별 분만 인프라 격차와 산모 위험 관리 공백이라는 문제에 착안해 서비스 아이디어를
+      발안함. 분만취약지 지원사업·모자의료 진료협력 시범사업 등 정책자료와 지역별 분만건수·
+      의료인프라 통계자료를 직접 조사해 문제를 구체화함. 이 아이디어에 공감하는 간호사 1인,
+      개발자 2인, 디자이너 1인을 직접 섭외해 5인 팀을 구성했으며, 팀 내 유일한 기획 인력으로서
+      주제 선정부터 참가신청서 제출까지 기획 전 과정을 총괄함.</p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">기획 산출물</div>
+      <h2>단독으로 설계·작성한 결과물</h2>
+    </div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead><tr><th>산출물</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="key">기능정의서</td><td>전체 화면 16개의 컴포넌트·비즈니스 로직·유효성 검사 규칙·ERD 연관 테이블을 정의한 프론트·백엔드 공동 참조 문서 (v1.0→v3.1, 4회 개정)</td></tr>
+          <tr><td class="key">화면목록 · 화면설계</td><td>산모 앱(8종)·보건소 대시보드(4종)·119·병원(4종), 총 16개 화면의 와이어프레임과 색상·배지·버튼 등 디자인 시스템을 직접 설계</td></tr>
+          <tr><td class="key">ERD</td><td>산모정보·기저질환·생체정보·증상일기 등 도메인별 테이블, 필드, 필수 여부, 사용 주체 정의</td></tr>
+          <tr><td class="key">유저플로우 · 서비스흐름도</td><td>고위험 산모 온보딩부터 응급 이송까지 4단계(Phase 1~4) 흐름 설계</td></tr>
+          <tr><td class="key">LLM 프롬프트 초안</td><td>증상일기(자연어) → 예비 위험도 분류를 위한 프롬프트 설계 및 임상 기준 변경 반영 개정</td></tr>
+          <tr><td class="key">참가신청서 · 개정이력 관리</td><td>해커톤 참가신청서 작성·제출, 전 문서의 버전별 변경 이력 관리</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">서비스 설계</div>
+      <h2>구조와 흐름</h2>
+      <p class="sub">산모 앱의 임상정보 업로드·자연어 증상 입력을 AI 분석 엔진과 Rule-Based Triage Engine으로 연결해, 보건소·119·의료기관까지 이어지는 구조를 설계함.</p>
+    </div>
+    <div class="gallery">
+      <figure>
+        <img src="assets/service-structure.png" alt="맘세이프 서비스 구조도 — 산모 앱, AI 분석 엔진, Rule-Based Triage Engine, 통합 플랫폼 연결 구조">
+        <figcaption>서비스 구조도</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/service-flow.png" alt="맘세이프 서비스 흐름도 — 고위험 산모 온보딩부터 응급 이송까지 4단계 흐름">
+        <figcaption>서비스 흐름도 (Phase 1~4)</figcaption>
+      </figure>
+      <figure class="dark">
+        <img src="assets/erd.png" alt="맘세이프 ERD — 산모정보, 기저질환, 생체정보, 증상일기 테이블 정의">
+        <figcaption>ERD (일부)</figcaption>
+      </figure>
+      <figure class="dark">
+        <img src="assets/roadmap.png" alt="맘세이프 프로젝트 로드맵 — Notion 기반 5인 팀 일정 관리표">
+        <figcaption>일정 관리 로드맵</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">화면 설계</div>
+      <h2>화면 16종과 디자인 시스템</h2>
+      <p class="sub">산모 앱(8종)·보건소 대시보드(4종)·119·병원(4종) 와이어프레임과 컴포넌트 가이드를 직접 설계함.</p>
+      <a href="momsafe-review-board.html" target="_blank" rel="noopener" class="review-link">
+        인터랙티브 리뷰보드 열기 <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="moves">
+      <div class="move">
+        <span class="move-tag">Design decision</span>
+        <h3>이중 위험도 체계를 항상 나란히 표시</h3>
+        <p>임상 데이터 기반 "실제위험도"와 LLM 증상일기 기반 "예비위험도"를 앱·대시보드 전반에서
+          항상 함께 노출하도록 설계함. 예비위험도는 최근 7일 입력이 없으면 자동으로 숨겨,
+          정보의 신뢰도가 낮아지는 상황을 화면 단위에서 관리함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">Design decision</span>
+        <h3>신뢰 확보를 우선한 입력 트랙 설계</h3>
+        <p>진료정보 입력을 진단서 OCR·직접 입력 2트랙으로 나누되, 기본 탭을 OCR 트랙으로 두어
+          신뢰를 우선 확보하도록 설계함. 두 트랙 모두 동일 테이블에 저장되며 입력 방식 필드로
+          구분해 데이터 정합성을 확보함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">Design decision</span>
+        <h3>응급 릴레이의 타임아웃 규칙을 화면에 반영</h3>
+        <p>119 SOS 발송 시 병원 1→2→3순위로 자동 릴레이하고, 90초 미응답 시 다음 순위로
+          자동 전환되는 규칙을 상태 표시(Step Indicator)로 설계해 담당자가 진행 상황을
+          실시간으로 확인할 수 있도록 함.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">기획 하이라이트</div>
+      <h2>요구사항 변경에 대응한 재설계</h2>
+    </div>
+    <div class="revlist">
+      <div class="rev">
+        <div class="v">v1.0</div>
+        <div class="t">화면 16개 전체의 컴포넌트·비즈니스 로직·ERD 연관 정의로 최초 작성.</div>
+      </div>
+      <div class="rev">
+        <div class="v">v2.0</div>
+        <div class="t">위험요소 분류 기준을 "19대 고위험 임신질환 목록"에서 "모자의료 진료협력
+          시범사업 Grade Ⅰ/Ⅱ/Ⅲ 분류체계(산과적·내과적·신체적·현재임신 4개 영역)"로 전면 교체.
+          보다 공신력 있는 임상 기준으로 데이터 구조를 재설계함.</div>
+      </div>
+      <div class="rev">
+        <div class="v">v3.0</div>
+        <div class="t">산모 등록 정보 입력 구조를 전면 재설계 — 정보입력 2트랙(OCR/직접입력)을
+          하나의 통합 화면으로 재구성.</div>
+      </div>
+      <div class="rev">
+        <div class="v">v3.1</div>
+        <div class="t">위험도 스코어링 엔진 반영에 맞춰 위험요소별 세부 항목을 추가.</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-bottom:64px;">
+    <div class="closing">
+      <p>아이디어 발안, 팀 구성, 요구정의, 데이터 설계, 서비스 흐름 설계까지 기획자로서
+        전체 사이클을 단독으로 총괄함.</p>
+      <p>예선 통과라는 결과에는 이르지 못했으나, 임상 기준 변경 등 외부 요건 변화에 맞춰
+        산출물을 세 차례 개정하며 완성도를 높이는 과정을 실제로 수행함.</p>
+      <span class="src">프로젝트를 마치며</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>고맙워요 (Mom's Safe) · 해커톤 프로젝트</span>
+    <span>이형준 · 서비스 기획 포트폴리오</span>
+  </footer>
+
+</div>

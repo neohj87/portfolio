@@ -1,0 +1,349 @@
+<!doctype html>
+<title>건강검진 데이터 분석기</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink:#16232F;
+    --paper:#F3F4F1;
+    --paper-raised:#FFFFFF;
+    --line:#DBDED7;
+    --muted:#5B6560;
+    --accent:#2B6E64;
+    --accent-strong:#1E4F48;
+    --accent-soft:#E4EDE9;
+    --gold:#A9782E;
+    --warn:#8A4A3D;
+    --warn-soft:#F3E6E2;
+    --shadow: 0 1px 2px rgba(22,35,47,.04), 0 8px 24px -12px rgba(22,35,47,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#EAEDE9;
+      --paper:#111817;
+      --paper-raised:#171F1E;
+      --line:#293331;
+      --muted:#93A29B;
+      --accent:#71C2B0;
+      --accent-strong:#8FD3C3;
+      --accent-soft:#1C2B28;
+      --gold:#D8AE5E;
+      --warn:#D89685;
+      --warn-soft:#2E211D;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#EAEDE9;
+    --paper:#111817;
+    --paper-raised:#171F1E;
+    --line:#293331;
+    --muted:#93A29B;
+    --accent:#71C2B0;
+    --accent-strong:#8FD3C3;
+    --accent-soft:#1C2B28;
+    --gold:#D8AE5E;
+    --warn:#D89685;
+    --warn-soft:#2E211D;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ color-scheme: light dark; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans KR', 'Noto Sans KR', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-block:64px;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding-inline:20px; }
+  h1,h2,h3{ font-family:'Source Serif 4', Georgia, serif; text-wrap:balance; margin:0; color:var(--ink); }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:18px; height:1px; background:var(--accent); display:inline-block; }
+  p{ line-height:1.75; color:var(--ink); }
+  .muted{ color:var(--muted); }
+
+  .masthead{ display:flex; flex-direction:column; gap:18px; padding-bottom:36px; margin-bottom:40px; border-bottom:1px solid var(--line); }
+  .masthead h1{ font-size:clamp(26px,4.2vw,38px); font-weight:600; line-height:1.28; }
+  .masthead .subtitle{ font-size:16px; color:var(--muted); max-width:56ch; }
+  .meta-row{ display:flex; flex-wrap:wrap; gap:10px 22px; font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--muted); }
+  .meta-row span b{ color:var(--ink); font-weight:500; }
+
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-bottom:56px; }
+  .stat{ background:var(--paper-raised); padding:18px 16px; display:flex; flex-direction:column; gap:6px; }
+  .stat .num{ font-family:'Source Serif 4', serif; font-size:20px; font-weight:600; line-height:1.2; }
+  .stat .label{ font-size:12px; color:var(--muted); line-height:1.5; }
+  @media (max-width:600px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+
+  section{ margin-bottom:56px; }
+  .section-head{ display:flex; flex-direction:column; gap:8px; margin-bottom:24px; }
+  .section-head h2{ font-size:23px; font-weight:600; }
+  .section-head .sub{ font-size:14px; color:var(--muted); }
+
+  .moves{ display:flex; flex-direction:column; gap:16px; }
+  .move{ background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:22px 24px; box-shadow:var(--shadow); }
+  .move .move-tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; display:block; }
+  .move h3{ font-size:16.5px; font-weight:600; margin-bottom:8px; }
+  .move p{ font-size:14.5px; margin:0; color:var(--ink); }
+
+  .data-table-wrap{ overflow-x:auto; }
+  .data-table{ width:100%; border-collapse:collapse; font-size:13.5px; background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .data-table th, .data-table td{ padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  .data-table tr:last-child td{ border-bottom:none; }
+  .data-table th{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:500; background:var(--accent-soft); }
+  .data-table td.key{ font-weight:600; white-space:nowrap; }
+  .data-table td.method{ color:var(--accent-strong); font-weight:600; white-space:nowrap; }
+
+  /* indicator grid */
+  .ind-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .ind{ background:var(--paper-raised); padding:16px 18px; }
+  .ind .name{ font-weight:600; font-size:14px; margin-bottom:4px; }
+  .ind .desc{ font-size:12.5px; color:var(--muted); line-height:1.55; }
+  @media (max-width:560px){ .ind-grid{ grid-template-columns:1fr; } }
+
+  /* proxy timeline (horizontal steps) */
+  .steps{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px; }
+  .step{ flex:1 1 140px; background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:14px 14px; }
+  .step .n{ font-family:'IBM Plex Mono', monospace; color:var(--accent); font-size:12px; margin-bottom:6px; }
+  .step .t{ font-size:13px; line-height:1.5; }
+
+  .callout{ border-radius:12px; padding:18px 20px; font-size:14px; line-height:1.65; }
+  .callout.warn{ background:var(--warn-soft); color:var(--ink); border:1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+  .callout.ok{ background:var(--accent-soft); color:var(--ink); border:1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+  .callout b{ color:var(--accent-strong); }
+  .callout.warn b{ color:var(--warn); }
+
+  /* hypothesis cards */
+  .hyp{ background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); margin-bottom:16px; }
+  .hyp:last-child{ margin-bottom:0; }
+  .hyp-head{ padding:16px 20px; background:var(--accent-soft); display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .hyp-head .h{ font-weight:600; font-size:14.5px; }
+  .hyp-head .verdict{ font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-strong); }
+  .hyp-body{ padding:16px 20px; display:flex; flex-direction:column; gap:10px; }
+  .hyp-row{ font-size:13.5px; }
+  .hyp-row .lbl{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); display:block; margin-bottom:3px; }
+
+  .closing{ background:var(--accent-soft); border-radius:14px; padding:30px 28px; text-align:left; }
+  .closing p{ font-family:'Source Serif 4', serif; font-size:18px; line-height:1.75; color:var(--ink); margin:0; }
+  .closing p + p{ margin-top:14px; }
+  .closing .src{ display:block; margin-top:14px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); }
+
+  footer{ border-top:1px solid var(--line); padding-top:24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:13px; color:var(--muted); }
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="eyebrow">데이터 분석 포트폴리오 · 개인 프로젝트</div>
+    <h1>건강검진 데이터 기반 흡연 여부 분석 프로젝트</h1>
+    <p class="subtitle">임상병리 전공 지식과 병원 행정 실무 경험을 결합해, 원시 데이터 전처리부터
+      가설 수립·통계 검정까지 전 과정을 단독으로 수행한 분석 기록.</p>
+    <div class="meta-row">
+      <span>유형 <b>개인 프로젝트 (1인 수행)</b></span>
+      <span>목표 변수 <b>흡연 여부 (Label)</b></span>
+      <span>사용 기법 <b>K-Means · t-test</b></span>
+      <span>기반 지식 <b>임상병리학 전공 · 병원 행정 실무</b></span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num">3 / 3</div>
+      <div class="label">수립한 가설 전건, 통계 검정으로 결론 도출</div>
+    </div>
+    <div class="stat">
+      <div class="num">8</div>
+      <div class="label">정상범위 기준까지 정리한 핵심 의학 지표</div>
+    </div>
+    <div class="stat">
+      <div class="num">1인</div>
+      <div class="label">전처리부터 해석까지 전 과정 단독 수행</div>
+    </div>
+    <div class="stat">
+      <div class="num">4년</div>
+      <div class="label">분석에 결합한 병원 행정 실무 경력</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">배경 및 목적</div>
+      <h2>교재 예제가 아닌, 실제 분석가 관점의 경험</h2>
+    </div>
+    <div class="moves">
+      <div class="move">
+        <span class="move-tag">Raw data</span>
+        <h3>원시 데이터 직접 처리</h3>
+        <p>완벽히 정제된 데이터가 아닌 공통 제공 원시 데이터를 다루며 정제·변수 해석·통계적
+          사고력을 직접 적용함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">Domain knowledge</span>
+        <h3>임상병리 + 병원 행정 실무 경험 결합</h3>
+        <p>임상병리학 전공 지식과 약 4년간의 병원 행정 업무(건강보험공단 금연치료 사업 참여,
+          환자 설문 지원·현장 관리) 경험을 바탕으로 가설을 설계함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">Validation</span>
+        <h3>분석 결과의 현실 검증</h3>
+        <p>분석 결과가 단순 숫자에 그치지 않도록, 실제 건강 상태 및 의료 현장에서 관찰되는
+          현상을 얼마나 반영하는지 검증하는 것을 목표로 함.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">데이터 이해</div>
+      <h2>목표 변수 및 핵심 의학 지표</h2>
+      <p class="sub">Label(흡연 여부)을 목표 변수로 두고, 분석 전 각 지표의 의학적 의미와 정상 범위를 먼저 정리함.</p>
+    </div>
+    <div class="ind-grid">
+      <div class="ind"><div class="name">Label (흡연 여부)</div><div class="desc">1=흡연자, 0=비흡연자 — 본 프로젝트의 목표 변수</div></div>
+      <div class="ind"><div class="name">BMI (체질량지수)</div><div class="desc">키·몸무게 기반 비만도 지표, 체형 평가 기본 수치</div></div>
+      <div class="ind"><div class="name">공복 혈당</div><div class="desc">8시간 이상 금식 후 측정, 당뇨 진단 기본 지표 (정상 70~100 mg/dL)</div></div>
+      <div class="ind"><div class="name">중성지방 (Triglyceride)</div><div class="desc">체내 저장 지방, 높을수록 심혈관 질환 위험 증가 (정상 150 mg/dL 미만)</div></div>
+      <div class="ind"><div class="name">혈청 크레아티닌</div><div class="desc">근육 대사 노폐물, 신장 기능 평가 지표 (정상 0.5~1.2 mg/dL)</div></div>
+      <div class="ind"><div class="name">총콜레스테롤 / HDL / LDL</div><div class="desc">혈관 건강 반영. 총콜레스테롤 240 미만, HDL 40~90, LDL 130 미만(mg/dL)</div></div>
+      <div class="ind"><div class="name">헤모글로빈 (Hemoglobin)</div><div class="desc">적혈구 산소 운반 단백질, 성별 정상범위 차이 큼 (남 13~17.5, 여 12~15.5 g/dL)</div></div>
+      <div class="ind"><div class="name">간 효소율</div><div class="desc">간세포 손상 시 혈액 유출 효소 수치, 간 건강 평가에 활용</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">전처리</div>
+      <h2>변수 특성에 따른 결측치 처리</h2>
+      <p class="sub">단순 행 삭제 시 데이터 손실·왜곡 우려 → 변수 특성을 고려해 각기 다른 방식으로 대체</p>
+    </div>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead><tr><th>변수</th><th>처리 방식</th><th>사유</th></tr></thead>
+        <tbody>
+          <tr><td class="key">혈압</td><td class="method">중앙값(Median) 대체</td><td>극단값의 영향을 최소화하기 위함</td></tr>
+          <tr><td class="key">시력</td><td class="method">최빈값(Mode) 대체</td><td>가장 많이 나타나는 값으로 대체</td></tr>
+          <tr><td class="key">중성지방</td><td class="method">나이대별 평균값 대체</td><td>연령에 따라 수치 차이가 크다고 판단</td></tr>
+          <tr><td class="key">공복 혈당</td><td class="method">전체 평균값 대체</td><td>전반적인 분포 수준을 반영</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px; font-size:14px;">이어서 <b>BMI 기준 체중 상태(저체중~3단계 비만, 6단계)</b>와
+      <b>연령 기반 나이대(20대~70대 초과, 7단계)</b> 파생변수를 생성하여, 연령·체형에 따른 집단 비교가
+      가능하도록 데이터를 구성함.</p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">데이터 한계 대응</div>
+      <h2>성별 데이터 부재 문제와 보완</h2>
+      <p class="sub">탐색적 데이터 분석(EDA) 과정에서 발견한 핵심 데이터 설계 한계</p>
+    </div>
+    <div class="callout warn" style="margin-bottom:18px;">
+      <b>핵심 문제</b> — 신체검사 데이터에서 성별은 매우 중요한 기준 변수이지만, 해당 데이터에는
+      성별 정보가 존재하지 않았음. 헤모글로빈은 남녀 정상 범위 자체가 다르기 때문에,
+      성별을 고려하지 않으면 분석 결과가 왜곡될 수 있는 상황.
+    </div>
+    <p style="font-size:14px; margin-bottom:10px;"><b>대응: K-Means를 활용한 Gender Proxy 생성</b> — 키·몸무게 분포 차이에 착안하여 군집화로 성별을 간접 추정함.</p>
+    <div class="steps">
+      <div class="step"><div class="n">STEP 1</div><div class="t">키·몸무게 데이터 사용</div></div>
+      <div class="step"><div class="n">STEP 2</div><div class="t">K-Means 군집 수 2개 설정</div></div>
+      <div class="step"><div class="n">STEP 3</div><div class="t">자동으로 두 그룹 분류</div></div>
+      <div class="step"><div class="n">STEP 4</div><div class="t">그룹별 헤모글로빈 평균 비교</div></div>
+      <div class="step"><div class="n">STEP 5</div><div class="t">Gender Proxy 변수 생성</div></div>
+    </div>
+    <div class="callout ok">
+      <b>한계 인식</b> — 체격이 큰 여성, 체격이 작은 남성은 반대 군집으로 오분류될 가능성이 있음을
+      인지함. K-Means는 데이터 부족 상황에서 시도할 수 있는 보완 방법일 뿐, 실제 성별 데이터를
+      완벽히 대체할 수는 없다는 점을 결론으로 명시함.
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">가설 검정</div>
+      <h2>세 가지 가설과 통계적 검증</h2>
+    </div>
+
+    <div class="hyp">
+      <div class="hyp-head"><span class="h">가설 1 — 흡연자는 헤모글로빈 수치가 높을 것이다</span><span class="verdict">채택</span></div>
+      <div class="hyp-body">
+        <div class="hyp-row"><span class="lbl">근거</span>흡연은 체내 산소 공급을 감소시키며, 이를 보상하기 위해 적혈구 생성이 증가한다는 의학적 기전에 근거함.</div>
+        <div class="hyp-row"><span class="lbl">검정 결과 (t-test)</span>흡연자 집단의 헤모글로빈 수치가 비흡연자보다 통계적으로 유의하게 높게 나타남.</div>
+      </div>
+    </div>
+
+    <div class="hyp">
+      <div class="hyp-head"><span class="h">가설 2 — 흡연자는 중성지방 수치가 높을 것이다</span><span class="verdict">채택</span></div>
+      <div class="hyp-body">
+        <div class="hyp-row"><span class="lbl">근거</span>흡연이 지질대사에 영향을 미쳐 혈중 지방 수치를 증가시킬 수 있다는 점에 근거함.</div>
+        <div class="hyp-row"><span class="lbl">검정 결과 (t-test)</span>흡연자 집단에서 중성지방 평균이 더 높게 나타났으며, 통계적으로도 유의미한 차이를 보임.</div>
+      </div>
+    </div>
+
+    <div class="hyp">
+      <div class="hyp-head"><span class="h">가설 3 — BMI는 흡연 여부와 큰 차이가 없을 것이다</span><span class="verdict">채택</span></div>
+      <div class="hyp-body">
+        <div class="hyp-row"><span class="lbl">발견된 의문</span>상관관계 분석에서 흡연 여부와 몸무게는 비교적 높은 관련성을 보임. 몸무게가 포함된 BMI 역시 강한 관련성을 보여야 하는 것 아닌지 의문이 발생함.</div>
+        <div class="hyp-row"><span class="lbl">검증 과정</span>직접 t-test를 수행해 재검정한 결과, 흡연자와 비흡연자 간 BMI 차이는 통계적으로 유의하지 않음을 확인함. 데이터 오류·전처리 오류 가능성을 먼저 배제하는 과정을 거침.</div>
+        <div class="hyp-row"><span class="lbl">최종 해석</span>흡연자는 상대적으로 키·몸무게가 큰 집단에 많이 분포하지만, 동시에 흡연이 대사 활동에 영향을 미쳐 체중 증가를 일부 상쇄시키는 효과가 존재해 BMI에서는 차이가 크게 나타나지 않은 것으로 해석함. 단순 숫자 비교만으로는 발견하기 어려운 현상을 데이터 검증을 통해 확인함.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">인사이트</div>
+      <h2>프로젝트를 통해 얻은 관점</h2>
+    </div>
+    <div class="moves">
+      <div class="move">
+        <span class="move-tag">01</span>
+        <h3>데이터를 정확히 바라보는 중요성</h3>
+        <p>요단백 변수는 숫자로 저장되어 있었지만 실제로는 등급형 범주 데이터였음. 동일한
+          유형의 변수(혈압: 최대값·최소값, 간효소율: AST·ALT)도 각각 수치화 기준이
+          통일되지 않았음을 확인함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">02</span>
+        <h3>데이터 수집 설계의 중요성</h3>
+        <p>성별 정보 부재 문제를 K-Means Gender Proxy로 보완했지만 실제 성별 정보를
+          완벽히 대체할 수는 없었음. 분석 단계보다 수집 설계 단계가 결과 품질을
+          더 크게 좌우할 수 있음을 확인함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">03</span>
+        <h3>다각적 변수 수집의 필요성</h3>
+        <p>흡연 여부는 혈액검사 수치 몇 개만으로 설명하기 어려움. 성별·연령·직업·생활습관·
+          사회경제적 수준·흡연량·흡연 기간 등이 함께 고려되어야 함을 확인함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">04</span>
+        <h3>실무 경험과 데이터 분석의 연결</h3>
+        <p>건강보험공단 금연치료 사업의 흡연 기간·흡연량·생활환경·금연 의지 설문 경험이
+          단순 행정 절차가 아닌, 분석 정확도를 높이는 실질적 정보로 연결됨을 재확인함.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-bottom:64px;">
+    <div class="closing">
+      <p>데이터 분석은 알고리즘 적용이 아니라 "왜 이 분석이 필요한가"를 규명하고, 데이터
+        특성에 맞는 기법을 선택하는 과정이라는 점을 확인함.</p>
+      <p>코드 실행 여부에 만족하지 않고 데이터의 구조적 한계를 검토하며 합리적인 분석
+        방향을 도출하는 접근을 취함. 이를 계기로 분석 기법의 원리와 적용 범위를 보다
+        정밀하게 이해하기 위한 학습을 지속하고 있음.</p>
+      <span class="src">프로젝트를 마치며</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>건강검진 데이터 기반 흡연 여부 분석 프로젝트 · 개인 프로젝트</span>
+    <span>이형준 · 데이터 분석 포트폴리오</span>
+  </footer>
+
+</div>

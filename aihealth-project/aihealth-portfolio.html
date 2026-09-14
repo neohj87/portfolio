@@ -1,0 +1,236 @@
+<!doctype html>
+<title>AI Health 개발기</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink:#16232F; --paper:#F3F4F1; --paper-raised:#FFFFFF; --line:#DBDED7;
+    --muted:#5B6560; --accent:#2B6E64; --accent-strong:#1E4F48; --accent-soft:#E4EDE9;
+    --gold:#A9782E; --warn:#8A4A3D; --warn-soft:#F3E6E2;
+    --shadow: 0 1px 2px rgba(22,35,47,.04), 0 8px 24px -12px rgba(22,35,47,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#EAEDE9; --paper:#111817; --paper-raised:#171F1E; --line:#293331;
+      --muted:#93A29B; --accent:#71C2B0; --accent-strong:#8FD3C3; --accent-soft:#1C2B28;
+      --gold:#D8AE5E; --warn:#D89685; --warn-soft:#2E211D;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#EAEDE9; --paper:#111817; --paper-raised:#171F1E; --line:#293331;
+    --muted:#93A29B; --accent:#71C2B0; --accent-strong:#8FD3C3; --accent-soft:#1C2B28;
+    --gold:#D8AE5E; --warn:#D89685; --warn-soft:#2E211D;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ color-scheme: light dark; }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'IBM Plex Sans KR', 'Noto Sans KR', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased; padding-block:64px;
+  }
+  .wrap{ max-width:760px; margin:0 auto; padding-inline:20px; }
+  h1,h2,h3{ font-family:'Source Serif 4', Georgia, serif; text-wrap:balance; margin:0; color:var(--ink); }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:18px; height:1px; background:var(--accent); display:inline-block; }
+  p{ line-height:1.75; color:var(--ink); }
+  .muted{ color:var(--muted); }
+
+  .masthead{ display:flex; flex-direction:column; gap:18px; padding-bottom:36px; margin-bottom:40px; border-bottom:1px solid var(--line); }
+  .masthead h1{ font-size:clamp(24px,4vw,34px); font-weight:600; line-height:1.35; }
+  .masthead .subtitle{ font-size:16px; color:var(--muted); max-width:58ch; }
+  .meta-row{ display:flex; flex-wrap:wrap; gap:10px 22px; font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--muted); }
+  .meta-row span b{ color:var(--ink); font-weight:500; }
+
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-bottom:56px; }
+  .stat{ background:var(--paper-raised); padding:18px 16px; display:flex; flex-direction:column; gap:6px; }
+  .stat .num{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; line-height:1.25; }
+  .stat .label{ font-size:12px; color:var(--muted); line-height:1.5; }
+  @media (max-width:600px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+
+  section{ margin-bottom:56px; }
+  .section-head{ display:flex; flex-direction:column; gap:8px; margin-bottom:24px; }
+  .section-head h2{ font-size:23px; font-weight:600; }
+  .section-head .sub{ font-size:14px; color:var(--muted); }
+
+  .moves{ display:flex; flex-direction:column; gap:16px; }
+  .move{ background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; padding:22px 24px; box-shadow:var(--shadow); }
+  .move .move-tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; display:block; }
+  .move h3{ font-size:16.5px; font-weight:600; margin-bottom:8px; }
+  .move p{ font-size:14.5px; margin:0; color:var(--ink); }
+  .move p + p{ margin-top:10px; }
+
+  .data-table-wrap{ overflow-x:auto; }
+  .data-table{ width:100%; border-collapse:collapse; font-size:13.5px; background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .data-table th, .data-table td{ padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  .data-table tr:last-child td{ border-bottom:none; }
+  .data-table th{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); font-weight:500; background:var(--accent-soft); }
+  .data-table td.key{ font-weight:600; white-space:nowrap; }
+
+  .gallery{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:620px){ .gallery{ grid-template-columns:1fr; } }
+  figure{ margin:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+  figure img{ display:block; width:100%; height:auto; background:#fff; }
+  figcaption{ padding:10px 14px; font-size:12.5px; color:var(--muted); border-top:1px solid var(--line); font-family:'IBM Plex Mono', monospace; letter-spacing:.01em; }
+
+  .callout{ border-radius:12px; padding:18px 20px; font-size:14px; line-height:1.65; }
+  .callout.warn{ background:var(--warn-soft); color:var(--ink); border:1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+  .callout.ok{ background:var(--accent-soft); color:var(--ink); border:1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+  .callout b{ color:var(--accent-strong); }
+  .callout.warn b{ color:var(--warn); }
+
+  .quote{ position:relative; padding:6px 0 6px 24px; border-left:3px solid var(--gold); margin-bottom:20px; }
+  .quote:last-child{ margin-bottom:0; }
+  .quote p{ font-family:'Source Serif 4', serif; font-style:italic; font-size:16px; line-height:1.65; color:var(--ink); margin:0; }
+  .quote .src{ display:block; margin-top:6px; font-family:'IBM Plex Mono', monospace; font-style:normal; font-size:11.5px; color:var(--muted); }
+
+  .closing{ background:var(--accent-soft); border-radius:14px; padding:30px 28px; text-align:left; }
+  .closing p{ font-family:'Source Serif 4', serif; font-size:18px; line-height:1.75; color:var(--ink); margin:0; }
+  .closing p + p{ margin-top:14px; }
+  .closing .src{ display:block; margin-top:14px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); }
+
+  footer{ border-top:1px solid var(--line); padding-top:24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:13px; color:var(--muted); }
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="eyebrow">부트캠프 팀 프로젝트 · 회고</div>
+    <h1>AI Health 백오피스 — 협업 공백에서도 결과 도출을 위한 노력</h1>
+    <p class="subtitle">팀 협업 체계가 계획대로 운영되지 않았던 프로젝트에서, 도메인 지식과
+      아키텍처 설계로 실질적인 진행을 이끌어낸 기록. 진행 과정의 한계까지 포함해 정리함.</p>
+    <div class="meta-row">
+      <span>유형 <b>부트캠프 팀 프로젝트 (6인 → 초반 2인 이탈)</b></span>
+      <span>기간 <b>2026.08.24 – 09.08</b></span>
+      <span>스택 <b>FastAPI · MySQL · Redis · Docker</b></span>
+      <span>과제 <b>부트캠프 제공 기능정의서·작업방식에 따라 완성된 프론트엔드에 백엔드 구현</b></span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num">6 → 4</div>
+      <div class="label">개인 사정으로 초반에 2인 이탈</div>
+    </div>
+    <div class="stat">
+      <div class="num">4건</div>
+      <div class="label">프론트-백엔드 계약 불일치를 직접 발견·수정</div>
+    </div>
+    <div class="stat">
+      <div class="num">5종</div>
+      <div class="label">프론트-백엔드 연동을 직접 검증한 화면</div>
+    </div>
+    <div class="stat">
+      <div class="num">0회</div>
+      <div class="label">결과물에 대한 팀 내 발표·평가 (미실시)</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">상황</div>
+      <h2>협업이 계획대로 운영되지 않은 과정</h2>
+    </div>
+    <p>프론트엔드 구현이 이미 완료되어 있고, 백엔드 기능정의서와 일자별 진행 방식까지 부트캠프가
+      제공한 상태에서 시작된 과제로, 위탁 개발과 유사한 구조였음. 6인 팀으로 시작했으나 개인
+      사정으로 2인이 초반에 이탈함. 남은 인원으로 역할을 나누자는
+      제안을 했으나, 팀은 각자 처음부터 끝까지 구현한 뒤 코드리뷰로 가장 완성도 높은 결과물을
+      선택해 병합하는 방식을 택함. 실제로는 소통 부재로 협업이 이뤄지지 않았고, 같은 API를
+      여러 명이 중복으로 구현하는 비효율이 반복됨. 결국 교육 마감일에 모여 가장 완성도 높은 구현을
+      선택하고 병합하는 방식으로 마무리됨. 결과물에 대한 별도의 발표·평가 절차가 없어,
+      명확한 기준 없이 마무리된 측면이 있었음.</p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">개인 기여</div>
+      <h2>협업 공백 속에서 만든 진행</h2>
+      <p class="sub">AI 코드 생성 도구를 적극적으로 활용해 구현했으며, 아래 기여는 코드를
+        전부 수작업으로 작성한 것이 아니라 문제 진단·방향 설정·AI 결과물의 검증과 조정을
+        본인이 주도한 것임.</p>
+    </div>
+    <div class="moves">
+      <div class="move">
+        <span class="move-tag">Domain knowledge</span>
+        <h3>실사용 병원 프로그램 기준을 결과물로 제시</h3>
+        <p>팀원 대부분이 병원 백오피스 프로그램(EMR/PACS 등) 사용 경험이 없는 상황에서,
+          실제 검사 프로그램의 사용 방식을 기준으로 어떤 화면과 데이터 흐름이 필요한지
+          제시함. 프론트엔드 템플릿을 백엔드 API에 직접 연결해, 환자 등록부터 X-Ray
+          업로드·AI 예측 결과 표시까지 실제로 동작하는 화면으로 방향을 구체화함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">Integration</span>
+        <h3>프론트-백엔드 계약 불일치 발견 및 수정</h3>
+        <p>이미 구현되어 있던 프론트엔드를 백엔드 API에 실제로 연결하며, 값을 하나씩
+          입력·클릭해보는 과정에서 계약 불일치 4건(부서·성별 enum 값 불일치, 권한 값
+          대소문자 불일치, 마이그레이션 미적용으로 인한 500 에러, 응답 스키마 필드 누락)을
+          직접 발견하고 수정함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">Documentation</span>
+        <h3>팀 회고 문서 작성</h3>
+        <p>프로젝트 종료 시점에 진행 과정 전체와 협업 과정에서 발생한 문제를 총정리한
+          회고 문서를 작성함.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">실행 화면</div>
+      <h2>프론트-백엔드 연동 검증 결과</h2>
+    </div>
+    <div class="gallery" style="grid-template-columns:1fr; max-width:380px;">
+      <figure>
+        <img src="assets/screen.jpg" alt="진료기록 상세 화면 — X-Ray 이미지와 AI 폐렴 예측 결과(Positive, Confidence 83.99%)">
+        <figcaption>진료기록 상세 · AI 예측 결과 (실행 화면)</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">회고</div>
+      <h2>남은 것과 아쉬운 것</h2>
+    </div>
+    <div class="quote">
+      <p>역할 분담을 먼저 제안했으나 팀의 합의를 이끌어내지 못함. 제안이 받아들여지지
+        않았을 때 대안을 관철시키기 위한 근거 제시와 설득 과정이 더 필요했다는 점을 확인함.</p>
+      <span class="src">— 역할 분담 제안이 받아들여지지 않은 경험</span>
+    </div>
+    <div class="quote">
+      <p>결과물에 대한 발표·평가 절차가 없을 경우, 협업의 동기와 마무리의 완성도가
+        함께 약해질 수 있다는 것을 확인함.</p>
+      <span class="src">— 발표·평가 없이 마무리된 과정</span>
+    </div>
+    <div class="quote">
+      <p>본인 의견을 더 적극적으로 반영해 팀을 설득했다면 더 나은 결과물이 나왔을 수
+        있다는 아쉬움이 남는 프로젝트였음.</p>
+      <span class="src">— 프로젝트를 마친 뒤의 소감</span>
+    </div>
+    <div class="callout warn">
+      <b>AI 도구 활용의 한계 인식</b> — AI 도구를 적극적으로 활용해 기능을 구현하는 과정에서,
+      코드를 100% 이해하지 못한 상태로도 기능이 동작하는 경우를 확인함. 이는 이후 학습에서
+      구현 원리를 직접 검증하는 절차가 필요하다는 것을 시사함.
+    </div>
+  </section>
+
+  <section style="margin-bottom:64px;">
+    <div class="closing">
+      <p>협업 체계가 계획대로 운영되지 않은 프로젝트였으나, 도메인 지식에 기반한 방향
+        제시와 프론트-백엔드 통합 검증을 통해 프로젝트를 완성으로 이끄는 데 기여함.</p>
+      <span class="src">프로젝트를 마치며</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>AI Health Web Assignment · 부트캠프 팀 프로젝트</span>
+    <span>이형준 · 개발 포트폴리오</span>
+  </footer>
+
+</div>

@@ -1,0 +1,509 @@
+<!doctype html>
+<title>페마라 프로젝트 기획기</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink:#16232F;
+    --paper:#F3F4F1;
+    --paper-raised:#FFFFFF;
+    --line:#DBDED7;
+    --muted:#5B6560;
+    --accent:#2B6E64;
+    --accent-strong:#1E4F48;
+    --accent-soft:#E4EDE9;
+    --gold:#A9782E;
+    --shadow: 0 1px 2px rgba(22,35,47,.04), 0 8px 24px -12px rgba(22,35,47,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#EAEDE9;
+      --paper:#111817;
+      --paper-raised:#171F1E;
+      --line:#293331;
+      --muted:#93A29B;
+      --accent:#71C2B0;
+      --accent-strong:#8FD3C3;
+      --accent-soft:#1C2B28;
+      --gold:#D8AE5E;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#EAEDE9;
+    --paper:#111817;
+    --paper-raised:#171F1E;
+    --line:#293331;
+    --muted:#93A29B;
+    --accent:#71C2B0;
+    --accent-strong:#8FD3C3;
+    --accent-soft:#1C2B28;
+    --gold:#D8AE5E;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ color-scheme: light dark; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans KR', 'Noto Sans KR', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-block:64px;
+  }
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding-inline:20px;
+  }
+  h1,h2,h3{
+    font-family:'Source Serif 4', Georgia, serif;
+    text-wrap:balance;
+    margin:0;
+    color:var(--ink);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px; height:1px;
+    background:var(--accent);
+    display:inline-block;
+  }
+  p{ line-height:1.75; color:var(--ink); }
+  .muted{ color:var(--muted); }
+
+  /* ---- masthead ---- */
+  .masthead{
+    display:flex; flex-direction:column; gap:18px;
+    padding-bottom:36px; margin-bottom:40px;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead h1{
+    font-size:clamp(28px,4.4vw,40px);
+    font-weight:600;
+    line-height:1.25;
+  }
+  .masthead .subtitle{
+    font-size:16px;
+    color:var(--muted);
+    max-width:56ch;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:10px 22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+  .meta-row span b{
+    color:var(--ink); font-weight:500;
+  }
+
+  /* ---- stat strip ---- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:56px;
+  }
+  .stat{
+    background:var(--paper-raised);
+    padding:18px 16px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .stat .num{
+    font-family:'Source Serif 4', serif;
+    font-size:20px; font-weight:600;
+    line-height:1.2;
+  }
+  .stat .label{
+    font-size:12px; color:var(--muted); line-height:1.5;
+  }
+  @media (max-width:600px){
+    .stats{ grid-template-columns:repeat(2,1fr); }
+  }
+
+  section{ margin-bottom:56px; }
+  .section-head{
+    display:flex; flex-direction:column; gap:8px;
+    margin-bottom:24px;
+  }
+  .section-head h2{
+    font-size:24px; font-weight:600;
+  }
+
+  /* ---- timeline ---- */
+  .timeline{
+    display:flex; flex-direction:column;
+    border-left:2px solid var(--line);
+    margin-left:6px;
+  }
+  .tl-item{
+    position:relative;
+    padding:0 0 28px 26px;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:"";
+    position:absolute; left:-7px; top:2px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--accent);
+  }
+  .tl-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--accent);
+    font-weight:500; letter-spacing:.02em;
+    margin-bottom:4px;
+  }
+  .tl-phase{
+    font-weight:600; font-size:15px; margin-bottom:4px;
+  }
+  .tl-action{ font-size:14px; color:var(--muted); line-height:1.65; max-width:56ch; }
+
+  /* ---- leadership moves ---- */
+  .moves{
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .move{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 24px;
+    box-shadow:var(--shadow);
+  }
+  .move .move-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:10px; display:block;
+  }
+  .move h3{ font-size:17px; font-weight:600; margin-bottom:8px; }
+  .move p{ font-size:14.5px; margin:0; color:var(--ink); }
+  .move p + p{ margin-top:10px; }
+
+  /* ---- role table ---- */
+  .role-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .role-table th, .role-table td{
+    padding:13px 14px;
+    text-align:left;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  .role-table tr:last-child td{ border-bottom:none; }
+  .role-table th{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--muted); font-weight:500;
+    background:var(--accent-soft);
+  }
+  .role-table td.role{ font-weight:600; white-space:nowrap; }
+  .role-table td.lead{ color:var(--accent-strong); font-weight:600; }
+  .role-table-wrap{ overflow-x:auto; }
+  .role-table td.owner{ white-space:nowrap; color:var(--muted); }
+
+  /* ---- quotes ---- */
+  .quote{
+    position:relative;
+    padding:6px 0 6px 28px;
+    border-left:3px solid var(--gold);
+    margin-bottom:26px;
+  }
+  .quote:last-child{ margin-bottom:0; }
+  .quote p{
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    font-size:17px;
+    line-height:1.65;
+    color:var(--ink);
+    margin:0;
+  }
+  .quote .src{
+    display:block;
+    margin-top:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-style:normal;
+    font-size:11.5px;
+    color:var(--muted);
+    letter-spacing:.02em;
+  }
+
+  /* ---- closing ---- */
+  .closing{
+    background:var(--accent-soft);
+    border-radius:14px;
+    padding:32px 28px;
+    text-align:left;
+  }
+  .closing p{
+    font-family:'Source Serif 4', serif;
+    font-size:19px;
+    line-height:1.7;
+    color:var(--ink);
+    margin:0;
+  }
+  .closing .src{
+    display:block; margin-top:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--muted);
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding-top:24px;
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px;
+    font-size:13px; color:var(--muted);
+  }
+  footer a{ color:var(--accent-strong); text-decoration:none; }
+  footer a:hover{ text-decoration:underline; }
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="eyebrow">기획자 포트폴리오</div>
+    <h1>난임 환자 임신 성공 예측 프로젝트 — 기획총괄로서의 기록</h1>
+    <p class="subtitle">협업 경험이 전무한 4인 팀에서 방향 설정·역할 설계·일정관리·발표 구성까지
+      전 과정을 기획하고 운영한 9일의 기록.</p>
+    <div class="meta-row">
+      <span>기간 <b>2026.07.03 – 07.11</b></span>
+      <span>팀 인원 <b>4명</b></span>
+      <span>맡은 역할 <b>PM · 기획총괄</b></span>
+      <span>소속 <b>OZ코딩스쿨 부트캠프 미니프로젝트</b></span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="num">4 / 4</div>
+      <div class="label">전원 발표 — 참가팀 중 유일</div>
+    </div>
+    <div class="stat">
+      <div class="num">8 / 8</div>
+      <div class="label">로드맵 단계, 전부 정시 완료</div>
+    </div>
+    <div class="stat">
+      <div class="num">4</div>
+      <div class="label">각자 이름으로 낸 개인 인사이트 문서</div>
+    </div>
+    <div class="stat">
+      <div class="num">0.0015</div>
+      <div class="label">최종 리더보드 1위 팀과의 ROC-AUC 격차</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">상황</div>
+      <h2>기획을 맡게 된 배경</h2>
+    </div>
+    <p>팀원 3명은 협업 프로젝트 경험이 없는 상태로 시작함. 본인은 실무에서
+      협업·프로젝트 진행 경험을 보유하고 있어, 이를 바탕으로 처음 협업하는
+      팀원들이 헤매지 않고 참여할 수 있는 체계를 설계함. 데이터는 난임 시술
+      환자 약 25.6만 건, 68개 컬럼의 의료 데이터였고, 팀 내 유일한 의료
+      도메인 지식 보유자로서 분석 방향 또한 함께 설계함. 킥오프에서 두 가지
+      과제를 설정함 — 데이터를 임상적 맥락에서 해석할 수 있도록 팀의 분석
+      방향을 제시하는 것, 그리고 처음 협업하는 팀원들이 9일 안에 각자의
+      몫을 완성할 수 있도록 운영 체계를 설계하는 것.</p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">산출물</div>
+      <h2>무엇을 만들었는가</h2>
+    </div>
+    <div class="role-table-wrap">
+      <table class="role-table">
+        <tbody>
+          <tr>
+            <td class="role">과제</td>
+            <td>난임 시술 데이터 기반 임신 성공 여부 예측 (이진분류)</td>
+          </tr>
+          <tr>
+            <td class="role">데이터</td>
+            <td>약 25.6만 행 × 68개 컬럼, 환자·시술·난임 원인·과거 이력 변수</td>
+          </tr>
+          <tr>
+            <td class="role">모델</td>
+            <td>LightGBM · XGBoost · CatBoost 개별 학습 후 가중평균·스태킹 앙상블</td>
+          </tr>
+          <tr>
+            <td class="role">평가지표</td>
+            <td>ROC-AUC</td>
+          </tr>
+          <tr>
+            <td class="role">최종 성과</td>
+            <td>하이퍼파라미터 튜닝·앙상블 적용 후 리더보드 1위 팀과 AUC 0.0015 차이까지 근접</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">타임라인</div>
+      <h2>9일간 기획자로서 실제로 한 일</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">07.03 (금) · 킥오프</div>
+        <div class="tl-phase">데이터 구조 공유 &amp; 역할 확정</div>
+        <div class="tl-action">팀 생성, 데이터 구조 브리핑, 의료 도메인 지식 공유(결측 구조·용어), 배경 기반 역할 분담 확정.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">07.06 (월) · EDA·전처리</div>
+        <div class="tl-phase">분석 원칙 조율</div>
+        <div class="tl-action">결측치를 "삭제" 대신 "해당 없음"으로 다루는 처리 원칙을 팀과 함께 확정, 진행 상황 트래킹.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">07.07 – 07.08 · 모델링·임상검증</div>
+        <div class="tl-phase">근거와 결과 교차 확인</div>
+        <div class="tl-action">1차 리더보드 제출 트래킹, 임상 근거 검증 결과와 모델 결과를 나란히 놓고 스토리 초안 작업 시작.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">07.09 (목) · 마무리</div>
+        <div class="tl-phase">최종 스토리라인 총괄</div>
+        <div class="tl-action">최종 모델 확정 확인, 발표자료 제작 총괄, 네 사람의 작업을 하나의 발표 흐름으로 정리.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">07.10 (금) · 제출·발표</div>
+        <div class="tl-phase">제출 &amp; 전원 발표</div>
+        <div class="tl-action">리더보드 최종 제출, 20분 발표에서 4명 전원이 각자 맡은 파트를 직접 발표.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">기획 전략</div>
+      <h2>세 가지 결정</h2>
+    </div>
+    <div class="moves">
+      <div class="move">
+        <span class="move-tag">Direction · 방향 설정</span>
+        <h3>임상 지식으로 "근거의 등급"을 나누다</h3>
+        <p>가설 수립 시 "확립된 임상 지식 / 논쟁적인 최신 연구 / 순수 추측"을
+          구분해 표시하는 기준을 팀에 제안함. 근거 없는 주장이 확정된 사실처럼
+          발표에 섞여 들어가는 것을 방지하기 위한 장치.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">Role design · 역할 설계</span>
+        <h3>고정 역할로 "각자의 몫"을 명확하게</h3>
+        <p>역할을 유동적으로 순환시키는 대신 각자의 배경에 맞춘 고정 역할을 부여함.
+          프로젝트 결과물이 팀원 각자의 포트폴리오로 이어지도록,
+          모두에게 이름을 걸고 낼 수 있는 몫을 설계함.</p>
+      </div>
+      <div class="move">
+        <span class="move-tag">Culture · 발표 문화</span>
+        <h3>전원 발표를 원칙으로</h3>
+        <p>대표 1인이 발표하는 방식 대신, 담당 파트를 본인이 직접 설명하는
+          방식으로 발표를 구성함. 참가 팀 중 팀원 전원이 발표한 유일한 사례.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">역할 분담표</div>
+      <h2>팀 구성과 역할 분담</h2>
+    </div>
+    <div class="role-table-wrap">
+      <table class="role-table">
+        <thead>
+          <tr><th>역할</th><th>담당</th><th>주요 업무</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="role">PM · 기획</td>
+            <td class="owner lead">본인</td>
+            <td>일정 관리, 기획서·발표자료 총괄, 팀 커뮤니케이션, 최종 스토리라인 정리, 리더보드 제출</td>
+          </tr>
+          <tr>
+            <td class="role">자료조사 · 근거검증</td>
+            <td class="owner">팀원 A</td>
+            <td>참고 임상 근거 리서치, 발표자료·문서 취합 정리</td>
+          </tr>
+          <tr>
+            <td class="role">EDA · 전처리</td>
+            <td class="owner">팀원 B</td>
+            <td>결측치·이상치 분석, 인코딩·스케일링</td>
+          </tr>
+          <tr>
+            <td class="role">모델링</td>
+            <td class="owner">팀원 C</td>
+            <td>모델 선정·학습, 하이퍼파라미터 튜닝, 깃허브 버전 관리</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">회고</div>
+      <h2>기획 과정에서 확인한 것</h2>
+    </div>
+
+    <div class="quote">
+      <p>역할을 고정함으로써 담당 소재를 명확히 하고, 처음 협업하는 팀원도
+        헤매지 않고 곧바로 몰입할 수 있는 환경을 조성함.</p>
+      <span class="src">— 역할 설계</span>
+    </div>
+
+    <div class="quote">
+      <p>자료조사 담당 팀원을 단순 보조가 아닌 "근거·자료 검증" 역할로 재정의함.
+        개인의 기여가 본인 이름으로 남을 수 있도록 배치하는 것이
+        기획자의 역할이라는 관점을 반영함.</p>
+      <span class="src">— 팀원 배치</span>
+    </div>
+
+    <div class="quote">
+      <p>동일한 오류가 여러 팀원에게서 반복된 원인을 개인의 부주의가 아닌
+        프로세스 공백(공통 스크립트 부재)으로 진단하고, 원칙 공유에서
+        그치지 않고 실행 단계까지 통일하는 방식으로 개선함.</p>
+      <span class="src">— 반복된 문제 진단</span>
+    </div>
+
+    <div class="quote">
+      <p>기획자의 역할을 모든 기술적 디테일을 직접 검증하는 것이 아니라,
+        적절한 도구와 협업하여 팀의 결과물을 끝까지 책임지고 완성도 있게
+        만드는 것으로 재정의함.</p>
+      <span class="src">— 기획자의 역할 정의</span>
+    </div>
+  </section>
+
+  <section style="margin-bottom:64px;">
+    <div class="closing">
+      <p>이번 프로젝트를 통해 지향한 것은 결과물의 성능 자체가 아니라,
+        협업 경험이 없는 팀원들과 함께 하나의 결과물을 끝까지 완성해내는
+        과정이었음.</p>
+      <span class="src">프로젝트를 마치며</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>[페마라] 난임 미니 프로젝트 · 2026.07.03 – 07.11</span>
+    <a href="https://github.com/Rim457/infertility-pregnancy-prediction" target="_blank" rel="noopener">GitHub 저장소 ↗</a>
+  </footer>
+
+</div>
