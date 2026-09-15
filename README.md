@@ -1,10 +1,10 @@
-# 이형준 포트폴리오
+# 이형준
 
-### 👉 **[포트폴리오 바로 보기 — neohj87.github.io/portfolio](https://neohj87.github.io/portfolio/)**
+**의료 현장의 경험을 바탕으로 현장과 서비스를 연결합니다.**
+
+### 👉 **[사이트 바로 보기 — neohj87.github.io/portfolio](https://neohj87.github.io/portfolio/)**
 
 > 아래 링크는 모두 브라우저에서 바로 열립니다. 파일을 내려받을 필요가 없습니다.
-
-의료행정·EMR 6년 4개월의 경력과, AI 헬스케어 부트캠프에서 진행한 4개 프로젝트를 정리했습니다.
 
 ---
 
@@ -12,7 +12,7 @@
 
 | | 내용 | 링크 |
 | --- | --- | --- |
-| **경력기술서** | 병원 원무·심사청구 → EMR 벤더 CS/QA·제품기획 (2019.12 – 2026.05) | **[바로 보기](https://neohj87.github.io/portfolio/career/career.html)** |
+| **경력 요약** | 병원 원무·심사청구 → EMR 벤더 CS/QA·제품기획 (2019.12 – 2026.05) | **[바로 보기](https://neohj87.github.io/portfolio/career/career.html)** |
 
 ## 프로젝트
 
