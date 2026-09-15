@@ -49,6 +49,21 @@
   .grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
   @media (max-width:640px){ .grid{ grid-template-columns:1fr; } }
 
+  .group-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--muted);
+    padding-bottom:10px; margin-bottom:18px; border-bottom:1px solid var(--line);
+  }
+  .group{ margin-bottom:42px; }
+  .group:last-child{ margin-bottom:0; }
+
+  .card.feature{
+    background:var(--accent-soft);
+    border-color:color-mix(in srgb, var(--accent) 32%, transparent);
+  }
+  .card.feature h2{ font-size:21px; }
+  .card.feature .meta{ border-top-color:color-mix(in srgb, var(--accent) 24%, transparent); }
+
   .card{
     display:flex; flex-direction:column; gap:14px;
     background:var(--paper-raised); border:1px solid var(--line); border-radius:14px;
@@ -84,10 +99,26 @@
   <div class="masthead">
     <div class="eyebrow">Portfolio</div>
     <h1>이형준 포트폴리오</h1>
-    <p class="subtitle">기획·데이터 분석·개발 4개 프로젝트를 정리했습니다. 잘 풀린 과정과
-      그렇지 않았던 과정을 있는 그대로 담았습니다.</p>
+    <p class="subtitle">의료행정·EMR 6년 4개월의 경력과, 기획·데이터 분석·개발 4개 프로젝트를
+      정리했습니다. 잘 풀린 과정과 그렇지 않았던 과정을 있는 그대로 담았습니다.</p>
   </div>
 
+  <div class="group">
+    <div class="group-label">경력</div>
+    <a class="card feature" href="career/career.html">
+      <div class="tag-row">
+        <span class="tag">의료행정 · EMR 6년 4개월</span>
+        <span class="tag">임상병리사</span>
+      </div>
+      <h2>경력기술서 — 현장 실무자에서 기획자로</h2>
+      <p>병원 원무·심사청구부터 EMR 벤더의 고객지원·QA·제품 기획까지, 의료 현장의 시스템을
+        사용자와 공급자 양쪽에서 경험한 이력.</p>
+      <div class="meta"><span>2019.12 – 2026.05</span><span class="go">자세히 보기 →</span></div>
+    </a>
+  </div>
+
+  <div class="group">
+  <div class="group-label">프로젝트</div>
   <div class="grid">
 
     <a class="card" href="pemara-project/leadership-portfolio.html">
@@ -131,9 +162,10 @@
     </a>
 
   </div>
+  </div>
 
   <footer>
-    <span>Portfolio · 4 Projects</span>
+    <span>Career · 4 Projects</span>
     <a href="https://github.com/neohj87/portfolio">github.com/neohj87/portfolio</a>
   </footer>
 
