@@ -1,7 +1,11 @@
 <!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Health 개발기</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
   :root{
     --ink:#16232F; --paper:#F3F4F1; --paper-raised:#FFFFFF; --line:#DBDED7;
@@ -96,6 +100,8 @@
 
   footer{ border-top:1px solid var(--line); padding-top:24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:13px; color:var(--muted); }
 </style>
+</head>
+<body>
 
 <div class="wrap">
 
@@ -119,11 +125,11 @@
     </div>
     <div class="stat">
       <div class="num">4건</div>
-      <div class="label">프론트-백엔드 계약 불일치를 직접 발견·수정</div>
+      <div class="label">일일 점검에서 드러나 수정한 프론트-백엔드 계약 불일치</div>
     </div>
     <div class="stat">
-      <div class="num">5종</div>
-      <div class="label">프론트-백엔드 연동을 직접 검증한 화면</div>
+      <div class="num">2주 · 매일</div>
+      <div class="label">작업 전 전날 병합 결과를 점검한 주기</div>
     </div>
     <div class="stat">
       <div class="num">0회</div>
@@ -136,46 +142,48 @@
       <div class="eyebrow">상황</div>
       <h2>협업이 계획대로 운영되지 않은 과정</h2>
     </div>
-    <p>프론트엔드 구현이 이미 완료되어 있고, 백엔드 기능정의서와 일자별 진행 방식까지 부트캠프가
-      제공한 상태에서 시작된 과제로, 위탁 개발과 유사한 구조였음. 6인 팀으로 시작했으나 개인
-      사정으로 2인이 초반에 이탈함. 남은 인원으로 역할을 나누자는
-      제안을 했으나, 팀은 각자 처음부터 끝까지 구현한 뒤 코드리뷰로 가장 완성도 높은 결과물을
-      선택해 병합하는 방식을 택함. 실제로는 소통 부재로 협업이 이뤄지지 않았고, 같은 API를
-      여러 명이 중복으로 구현하는 비효율이 반복됨. 결국 교육 마감일에 모여 가장 완성도 높은 구현을
-      선택하고 병합하는 방식으로 마무리됨. 결과물에 대한 별도의 발표·평가 절차가 없어,
-      명확한 기준 없이 마무리된 측면이 있었음.</p>
+    <p>프론트엔드 구현이 완료되어 있고 백엔드 기능정의서와 일자별 진행 방식까지 부트캠프가
+      제공한 상태에서 시작된 과제였음. 설계를 새로 만드는 과제라기보다, 정답에 가까운 요건이
+      주어진 상태에서 AI 도구를 얼마나 적극적으로 활용해 완성하느냐에 가까운 성격이었음.</p>
+    <p>6인 팀으로 시작했으나 개인 사정으로 2인이 초반에 이탈함. 역할을 나누자고 제안했으나
+      다수결에 따라 각자 전 영역을 구현하는 방식으로 결정됨. 이 방식에 따라 2주 동안 매일
+      교육 마감 시간에 모여 그날의 구현 중 가장 완성도 높은 것을 선택해 병합했고, 같은 기능을
+      여러 명이 중복 구현하는 비효율과 병합할 때마다 발생하는 불일치가 반복됨. 결과물에 대한
+      발표·평가 절차가 없어 명확한 기준 없이 종료된 측면이 있었음.</p>
   </section>
 
   <section>
     <div class="section-head">
       <div class="eyebrow">개인 기여</div>
       <h2>협업 공백 속에서 만든 진행</h2>
-      <p class="sub">AI 코드 생성 도구를 적극적으로 활용해 구현했으며, 아래 기여는 코드를
-        전부 수작업으로 작성한 것이 아니라 문제 진단·방향 설정·AI 결과물의 검증과 조정을
-        본인이 주도한 것임.</p>
+      <p class="sub">구현 자체를 AI 도구에 크게 의존한 과제였음. 아래는 코드를 직접 작성했다는
+        의미가 아니라, 도메인 설명과 사용성 리뷰·협업 방식 제안·매일의 병합 점검과 반영을
+        맡았다는 의미임.</p>
     </div>
     <div class="moves">
       <div class="move">
         <span class="move-tag">Domain knowledge</span>
-        <h3>실사용 병원 프로그램 기준을 결과물로 제시</h3>
-        <p>팀원 대부분이 병원 백오피스 프로그램(EMR/PACS 등) 사용 경험이 없는 상황에서,
-          실제 검사 프로그램의 사용 방식을 기준으로 어떤 화면과 데이터 흐름이 필요한지
-          제시함. 프론트엔드 템플릿을 백엔드 API에 직접 연결해, 환자 등록부터 X-Ray
-          업로드·AI 예측 결과 표시까지 실제로 동작하는 화면으로 방향을 구체화함.</p>
+        <h3>현업 백오피스 화면을 공유하고 사용성 리뷰 진행</h3>
+        <p>팀원 대부분이 병원 백오피스 프로그램(EMR/PACS 등)을 사용해 본 경험이 없는 상황에서,
+          실제 현업에서 쓰는 화면을 공유해 백오피스 관리 프로그램이 무엇이고 어떤 화면·데이터
+          흐름이 필요한지 설명함. 이어서 사용자 입장에서의 사용성을 검토한 리뷰 문서를 직접
+          작성해 팀에 공유하고 리뷰를 진행함.</p>
       </div>
       <div class="move">
         <span class="move-tag">Integration</span>
-        <h3>프론트-백엔드 계약 불일치 발견 및 수정</h3>
-        <p>이미 구현되어 있던 프론트엔드를 백엔드 API에 실제로 연결하며, 값을 하나씩
-          입력·클릭해보는 과정에서 계약 불일치 4건(부서·성별 enum 값 불일치, 권한 값
-          대소문자 불일치, 마이그레이션 미적용으로 인한 500 에러, 응답 스키마 필드 누락)을
-          직접 발견하고 수정함.</p>
+        <h3>매일 병합 결과를 점검하는 루틴 운영</h3>
+        <p>매일 각자의 구현을 병합했기 때문에 병합할 때마다 팀원 간 구현 차이로 불일치가
+          발생할 수밖에 없는 구조였음. 매일 작업 시작 전 전날 결과물을 AI 도구로 점검했고,
+          도구가 먼저 오류와 수정 방향을 제시하면 이를 확인해 반영하는 방식으로 정합성을
+          유지함. 이 과정에서 드러난 문제는 부서·성별 enum 값 불일치, 권한 값 대소문자 불일치,
+          마이그레이션 미적용으로 인한 500 에러, 응답 스키마 필드 누락 등이었음.</p>
       </div>
       <div class="move">
-        <span class="move-tag">Documentation</span>
-        <h3>팀 회고 문서 작성</h3>
-        <p>프로젝트 종료 시점에 진행 과정 전체와 협업 과정에서 발생한 문제를 총정리한
-          회고 문서를 작성함.</p>
+        <span class="move-tag">Process</span>
+        <h3>협업 방식 제안 — 역할 분담과 일일 PR·리뷰</h3>
+        <p>중복 구현을 줄이기 위해 역할 분담을 제안했으나 다수결로 채택되지 않음. 이후
+          매일 정해진 시간까지 GitHub PR을 등록하고 상호 리뷰하는 방식을 제안했으나
+          실제 운영으로는 정착되지 않음.</p>
       </div>
     </div>
   </section>
@@ -183,7 +191,7 @@
   <section>
     <div class="section-head">
       <div class="eyebrow">실행 화면</div>
-      <h2>프론트-백엔드 연동 검증 결과</h2>
+      <h2>완성된 서비스 화면</h2>
     </div>
     <div class="gallery" style="grid-template-columns:1fr; max-width:380px;">
       <figure>
@@ -199,8 +207,9 @@
       <h2>남은 것과 아쉬운 것</h2>
     </div>
     <div class="quote">
-      <p>역할 분담을 먼저 제안했으나 팀의 합의를 이끌어내지 못함. 제안이 받아들여지지
-        않았을 때 대안을 관철시키기 위한 근거 제시와 설득 과정이 더 필요했다는 점을 확인함.</p>
+      <p>역할 분담과 일일 PR·리뷰를 제안했으나 다수결에서 채택되지 않았고, 채택된 이후에도
+        운영으로 정착시키지 못함. 제안이 받아들여지지 않았을 때 근거를 들어 설득하고 실행까지
+        끌고 가는 과정이 더 필요했다는 점을 확인함.</p>
       <span class="src">— 역할 분담 제안이 받아들여지지 않은 경험</span>
     </div>
     <div class="quote">
@@ -234,3 +243,5 @@
   </footer>
 
 </div>
+</body>
+</html>
