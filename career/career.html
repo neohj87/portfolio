@@ -7,13 +7,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   :root{
-    --ink:#17211B; --paper:#F4F8F5; --paper-raised:#FFFFFF; --line:#D8E6DD;
+    --ink:#17211B; --paper:#F7FAF8; --paper-raised:#FFFFFF; --line:#D8E6DD;
     --muted:#5C6D63; --accent:#03C75A; --accent-strong:#007A37; --accent-soft:#E5F8ED;
     --gold:#00A84F;
     --shadow: 0 1px 2px rgba(9,53,28,.05), 0 8px 24px -12px rgba(0,122,55,.16);
   }
   @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
+    :root[data-theme="dark"]{
       --ink:#EFF7F2; --paper:#08110C; --paper-raised:#0F1B14; --line:#24382C;
       --muted:#9CB0A3; --accent:#03E36C; --accent-strong:#69F0A2; --accent-soft:#123121;
       --gold:#4FE18A;
@@ -27,7 +27,7 @@
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
   }
   *{ box-sizing:border-box; }
-  html{ color-scheme: light dark; }
+  html{ color-scheme: light; }
   body{
     margin:0; background:var(--paper); color:var(--ink);
     font-family:'IBM Plex Sans KR', 'Noto Sans KR', system-ui, sans-serif;
