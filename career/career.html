@@ -119,6 +119,13 @@
   .closing p{ font-family:'Source Serif 4', serif; font-size:18px; line-height:1.75; color:var(--ink); margin:0; }
   .closing p + p{ margin-top:14px; }
 
+  @media print{
+    @page{ size:A4; margin:0; }
+    .section-head{ break-after:avoid-page; }
+    .job, .skill, .data-table-wrap, .closing{ break-inside:avoid-page; }
+    .career-section, .education-section{ break-before:page; }
+  }
+
 </style>
 </head>
 <body>
@@ -149,7 +156,7 @@
     </div>
   </div>
 
-  <section>
+  <section class="career-section">
     <div class="section-head">
       <div class="eyebrow">경력 상세</div>
       <h2>근무 이력</h2>
@@ -342,7 +349,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="education-section">
     <div class="section-head">
       <div class="eyebrow">학력 · 면허 · 자격</div>
       <h2>기본 사항</h2>
