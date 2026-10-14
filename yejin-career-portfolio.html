@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="예진산부인과 원무·심사청구, 외래 삭감 분석과 산과 DRG 청구 개선 경력 포트폴리오">
+  <title>예진산부인과 경력 포트폴리오</title>
+  <style>
+    :root {
+      --ink: #162432;
+      --ink-soft: #4d5c69;
+      --navy: #173b57;
+      --blue: #1f6b8d;
+      --teal: #137a76;
+      --mint: #dff3ed;
+      --mint-strong: #b9e5da;
+      --cream: #f7f4ed;
+      --paper: #fff;
+      --line: #dce4e6;
+      --orange: #d06d36;
+      --shadow: 0 18px 48px rgba(19, 54, 70, .09);
+      --radius: 22px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f4f7f5;
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      line-height: 1.78;
+      letter-spacing: -.015em;
+      overflow-wrap: break-word;
+      word-break: keep-all;
+    }
+    button, a { font: inherit; }
+    a { color: inherit; }
+    .shell { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      color: var(--teal);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: currentColor; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(220, 228, 230, .85);
+      background: rgba(255, 255, 255, .9);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand { font-weight: 900; color: var(--navy); white-space: nowrap; text-decoration: none; }
+    .nav { display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      padding: 7px 10px;
+      color: var(--ink-soft);
+      font-size: .83rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      border-radius: 999px;
+    }
+    .nav a:hover, .nav a.active { color: var(--teal); background: var(--mint); }
+    .print-button {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 12px;
+      color: var(--navy);
+      background: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 690px;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      color: #fff;
+      background:
+        radial-gradient(circle at 78% 16%, rgba(72, 187, 169, .34), transparent 34%),
+        linear-gradient(135deg, #102f47 0%, #174c64 57%, #116c6c 100%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -110px;
+      bottom: -260px;
+      width: 620px;
+      aspect-ratio: 1;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 50%;
+      box-shadow: 0 0 0 72px rgba(255,255,255,.035), 0 0 0 144px rgba(255,255,255,.025);
+    }
+    .hero-inner { position: relative; z-index: 1; padding: 90px 0 76px; }
+    .hero .eyebrow { color: #8fe1d1; }
+    .hero h1 {
+      max-width: 1080px;
+      margin: 0;
+      font-size: clamp(2.35rem, 4.4vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: -.055em;
+      text-wrap: balance;
+    }
+    .hero h1 span { display: block; margin-top: 12px; color: #9be5d7; }
+    .hero h1 span b { display: block; font: inherit; }
+    .hero-lead {
+      max-width: 800px;
+      margin: 30px 0 0;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(1.02rem, 2.2vw, 1.22rem);
+    }
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 46px;
+    }
+    .hero-meta div {
+      min-width: 0;
+      padding: 17px 18px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 16px;
+      background: rgba(255,255,255,.07);
+    }
+    .hero-meta small { display: block; color: rgba(255,255,255,.58); font-weight: 700; }
+    .hero-meta strong { display: block; margin-top: 3px; font-size: 1.02rem; }
+
+    main { padding: 70px 0 110px; }
+    section { scroll-margin-top: 88px; }
+    .section { margin-top: 96px; }
+    .section:first-child { margin-top: 0; }
+    .section-head { width: 100%; max-width: none; margin-bottom: 34px; }
+    .section-head h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(1.9rem, 2.8vw, 2.7rem);
+      line-height: 1.18;
+      letter-spacing: -.045em;
+      text-wrap: balance;
+    }
+    .title-line { display: block; }
+    .title-line + .title-line { margin-top: .06em; }
+    .no-break { display: inline-block; white-space: nowrap; }
+    .section-head > p:not(.eyebrow) { max-width: 840px; }
+    .section-head p { margin: 18px 0 0; color: var(--ink-soft); font-size: 1.05rem; }
+    .section-head.fee-head { max-width: none; width: 100%; }
+    .section-head.fee-head h2 {
+      width: 100%;
+      text-wrap: wrap;
+    }
+    .section-head.fee-head .title-line:last-child {
+      margin-top: .12em;
+      white-space: nowrap;
+    }
+    .card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .story { padding: clamp(26px, 5vw, 52px); }
+    .story p { margin: 0; }
+    .story p + p { margin-top: 18px; }
+    .story strong { color: var(--teal); }
+    .highlight {
+      margin-top: 24px;
+      padding: 20px 22px;
+      border-left: 4px solid var(--orange);
+      border-radius: 0 14px 14px 0;
+      background: #fff7f1;
+      color: #603b27;
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0;
+      padding: 30px;
+    }
+    .time-item { position: relative; min-width: 0; padding: 40px 18px 12px; border-top: 2px solid var(--mint-strong); }
+    .time-item::before {
+      content: "";
+      position: absolute;
+      top: -7px;
+      left: 18px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 6px var(--mint);
+    }
+    .time-item time { color: var(--teal); font-size: .84rem; font-weight: 900; }
+    .time-item h3 { margin: 6px 0 7px; color: var(--navy); font-size: 1.05rem; line-height: 1.35; }
+    .time-item p { margin: 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.58; }
+
+    .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+    .step { padding: 23px; }
+    .step-no {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      color: #fff;
+      background: var(--teal);
+      font-weight: 900;
+    }
+    .step h3 { margin: 15px 0 8px; color: var(--navy); font-size: 1.05rem; }
+    .step p { margin: 0; color: var(--ink-soft); font-size: .93rem; line-height: 1.68; }
+
+    .metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 22px; }
+    .metric { padding: 27px; background: linear-gradient(145deg, #fff, #f3faf7); }
+    .metric .label { color: var(--ink-soft); font-size: .88rem; font-weight: 750; }
+    .metric .value { margin-top: 8px; color: var(--navy); font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 950; line-height: 1; }
+    .metric .value em { color: var(--teal); font-style: normal; }
+    .metric .sub { margin-top: 11px; color: var(--ink-soft); font-size: .88rem; }
+    .arrow { color: var(--orange); padding-inline: .12em; }
+
+    .example-box { margin-top: 22px; padding: 27px; }
+    .example-box h3 { margin: 0 0 14px; color: var(--navy); }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 9px; }
+    .tag { padding: 8px 12px; border-radius: 10px; background: var(--cream); color: #4a5660; font-size: .9rem; font-weight: 700; }
+
+    .split { display: grid; grid-template-columns: 1.15fr .85fr; gap: 20px; align-items: stretch; }
+    .policy-list { margin: 0; padding: 0; list-style: none; }
+    .policy-list li { padding: 19px 0; border-bottom: 1px solid var(--line); }
+    .policy-list li:last-child { border-bottom: 0; }
+    .policy-list strong { display: block; color: var(--navy); }
+    .policy-list span { display: block; margin-top: 4px; color: var(--ink-soft); font-size: .93rem; }
+    .feature-metric {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 32px;
+      color: #fff;
+      background: linear-gradient(145deg, #155c68, #128179);
+    }
+    .feature-metric .kicker { color: #b9eee5; font-weight: 800; }
+    .feature-metric .numbers { margin: 28px 0; }
+    .feature-metric .numbers strong { display: block; font-size: clamp(2.7rem, 7vw, 4.9rem); line-height: 1; letter-spacing: -.05em; }
+    .feature-metric .numbers span { display: block; margin-top: 11px; color: rgba(255,255,255,.78); }
+    .feature-metric p { margin: 0; color: rgba(255,255,255,.78); font-size: .93rem; }
+
+    .drg-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .drg-flow article { position: relative; padding: 22px 20px; }
+    .drg-flow article:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      z-index: 2;
+      width: 30px;
+      color: var(--teal);
+      font-size: 1.2rem;
+      font-weight: 900;
+      text-align: center;
+      transform: translateY(-50%);
+    }
+    .drg-flow b { color: var(--teal); font-size: .78rem; }
+    .drg-flow h3 { margin: 7px 0 7px; color: var(--navy); font-size: .98rem; line-height: 1.4; }
+    .drg-flow p { margin: 0; color: var(--ink-soft); font-size: .86rem; line-height: 1.58; }
+
+    .table-card { margin-top: 24px; overflow: hidden; }
+    .table-head { padding: 25px 28px 18px; }
+    .table-head h3 { margin: 0; color: var(--navy); }
+    .table-head p { margin: 6px 0 0; color: var(--ink-soft); font-size: .9rem; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; min-width: 760px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    th, td { padding: 14px 18px; border-top: 1px solid var(--line); text-align: right; white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--navy); background: #eef6f3; font-size: .86rem; }
+    tbody td { font-size: .92rem; }
+    tbody tr.total { color: var(--navy); background: #fbfcfa; font-weight: 900; }
+    .table-note { padding: 14px 28px 22px; color: var(--ink-soft); font-size: .82rem; }
+
+    .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+    .compare-card { padding: 27px; }
+    .compare-card h3 { margin: 0; color: var(--navy); font-size: 1.08rem; }
+    .compare-card .big { margin: 14px 0 8px; color: var(--teal); font-size: 2.25rem; font-weight: 950; line-height: 1.1; }
+    .compare-card p { margin: 0; color: var(--ink-soft); font-size: .91rem; }
+
+    .annual-bars { display: grid; gap: 23px; padding: 31px; margin-top: 20px; }
+    .bar-row { display: grid; grid-template-columns: 150px 1fr 125px; gap: 16px; align-items: center; }
+    .bar-label { font-weight: 800; color: var(--navy); }
+    .track { height: 14px; border-radius: 999px; background: #e7eeec; overflow: hidden; }
+    .fill { height: 100%; border-radius: inherit; background: var(--teal); }
+    .fill.alt { background: var(--orange); }
+    .bar-value { text-align: right; font-weight: 900; font-variant-numeric: tabular-nums; }
+    .analysis-note { margin-top: 20px; padding: 25px 28px; background: #eef7f4; border-radius: 18px; }
+    .analysis-note h3 { margin: 0 0 9px; color: var(--navy); }
+    .analysis-note p { margin: 0; color: var(--ink-soft); }
+
+    .duty-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .duty { padding: 28px; }
+    .duty h3 { margin: 0 0 12px; color: var(--navy); }
+    .duty ul { margin: 0; padding-left: 1.15rem; color: var(--ink-soft); }
+    .duty li + li { margin-top: 8px; }
+    .agency-title { margin: 34px 0 16px; color: var(--navy); font-size: 1.3rem; }
+    .agency-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .agency { padding: 22px; box-shadow: none; }
+    .agency strong { display: block; color: var(--teal); font-size: .95rem; }
+    .agency p { margin: 7px 0 0; color: var(--ink-soft); font-size: .88rem; line-height: 1.62; }
+
+    .closing {
+      padding: clamp(30px, 6vw, 58px);
+      color: #fff;
+      background: linear-gradient(135deg, var(--navy), #155f69);
+    }
+    .closing h2 { margin: 0; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.25; }
+    .closing p { max-width: 830px; margin: 18px 0 0; color: rgba(255,255,255,.8); }
+    footer { padding: 34px 20px 50px; color: #6a777f; text-align: center; font-size: .83rem; }
+    .page-links { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; }
+    .page-links a { padding: 11px 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--navy); background: #fff; font-weight: 850; text-decoration: none; }
+
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 960px) {
+      .topbar-inner { flex-wrap: wrap; padding: 10px 0; }
+      .nav { display: flex; order: 3; width: 100%; }
+      .hero { min-height: auto; }
+      .hero-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .timeline { grid-template-columns: 1fr; }
+      .time-item { padding: 12px 10px 22px 34px; border-top: 0; border-left: 2px solid var(--mint-strong); }
+      .time-item::before { top: 7px; left: -7px; }
+      .steps, .drg-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .drg-flow article:not(:last-child)::after { display: none; }
+      .split { grid-template-columns: 1fr; }
+      .agency-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      .shell { width: min(calc(100% - 26px), var(--max)); }
+      .topbar-inner { min-height: 58px; }
+      .brand { font-size: .9rem; }
+      .print-button { padding: 6px 9px; font-size: .78rem; }
+      .hero-inner { padding: 70px 0 58px; }
+      .hero h1 { font-size: clamp(2.2rem, 11vw, 3.2rem); }
+      .hero h1 span b { display: inline; }
+      .hero h1 span b + b::before { content: " "; }
+      .section-head.fee-head .title-line:last-child { white-space: normal; }
+      .hero-meta, .steps, .metric-grid, .drg-flow, .comparison, .duty-grid, .agency-grid { grid-template-columns: 1fr; }
+      .metric .value { font-size: clamp(1.55rem, 8vw, 2.2rem); line-height: 1.25; }
+      main { padding-top: 48px; }
+      .section { margin-top: 72px; }
+      .timeline { padding: 25px; }
+      .bar-row { grid-template-columns: 1fr; gap: 7px; }
+      .bar-value { text-align: left; }
+      .story, .feature-metric { padding: 25px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    @media print {
+      @page { size: A4; margin: 14mm; }
+      body { background: #fff; font-size: 10.5pt; }
+      .topbar, .print-button { display: none !important; }
+      .hero { min-height: 0; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .hero-inner { padding: 42px 0; }
+      .hero h1 { font-size: 36pt; }
+      main { padding: 28px 0; }
+      .section { margin-top: 42px; break-inside: auto; }
+      .card, .story, .metric, .duty, .compare-card, .table-card { box-shadow: none; break-inside: avoid; }
+      .reveal { opacity: 1; transform: none; }
+      .table-scroll { overflow: visible; }
+      table { min-width: 0; font-size: 8pt; }
+      th, td { padding: 7px 6px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="index.html">이형준 · Career Portfolio</a>
+      <nav class="nav" aria-label="경력 페이지">
+        <a href="index.html">HOME</a>
+        <a class="active" href="yejin-career-portfolio.html">예진산부인과</a>
+        <a href="hansarang-career-portfolio.html">한사랑병원</a>
+        <a href="neosoft-career-portfolio.html">네오소프트뱅크</a>
+        <a href="tryup-career-portfolio.html">트라이업</a>
+      </nav>
+      <button class="print-button" type="button" onclick="window.print()">PDF로 저장</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="shell hero-inner">
+      <p class="eyebrow">Hospital Administration &amp; Claims Review</p>
+      <h1>예진산부인과<span><b>외래에서 DRG까지,</b><b>청구 구조를 다시 설계한 6개월</b></span></h1>
+      <p class="hero-lead">심평원 통지서의 반복 삭감 분석에서 시작해 누락 수가와 분만수가를 발굴하고, 산과 DRG 지침을 실제 진료·검사 프로세스에 연결하였습니다. 단순히 청구서를 수정하는 데 그치지 않고 시스템 설정, 의료진 교육, 검사 장비 도입과 업무 매뉴얼까지 이어지도록 개선하였습니다.</p>
+      <div class="hero-meta" aria-label="근무 정보">
+        <div><small>근무기간</small><strong>2019.12–2022.03</strong></div>
+        <div><small>직급·직무</small><strong>주임 · 원무 및 심사청구</strong></div>
+        <div><small>월평균 청구 규모</small><strong>외래 3,500–4,000건</strong></div>
+        <div><small>입원 규모</small><strong>DRG 포함 월평균 약 70건</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="shell">
+    <section class="section" id="overview">
+      <div class="section-head reveal">
+        <p class="eyebrow">Project Overview</p>
+        <h2><span class="title-line">한 건의 삭감을 막는 업무에서,</span><span class="title-line">병원 전체 청구 구조를 바꾸는 업무로</span></h2>
+        <p>2019년 12월 입사 후 2020년 4월경부터 본격적으로 청구업무를 담당하였습니다. 외래 심사청구를 먼저 점검하면서 반복 삭감과 누락 수가를 확인하였고, 학습과 적용 범위를 분만수가·입원·DRG까지 확장하였습니다. 약 6개월 동안 개선안을 정리하고 2020년 10월 이후 실제 현장 적용을 시작했으며, 2021년은 제가 정비한 기준과 프로세스가 연중 온전히 작동한 첫해였습니다.</p>
+      </div>
+
+      <div class="card timeline reveal" aria-label="개선 과정 타임라인">
+        <article class="time-item"><time>2019.12</time><h3>입사 및 현황 파악</h3><p>기존 원무·청구 방식과 개선 전 기준 데이터를 확인하였습니다.</p></article>
+        <article class="time-item"><time>2020.04경</time><h3>청구업무 본격 담당</h3><p>심평원 통지서를 기준으로 외래 행위·약제 삭감 패턴을 분석하였습니다.</p></article>
+        <article class="time-item"><time>2020년 약 6개월</time><h3>개선 범위 확장</h3><p>외래에서 누락 수가, 분만수가, 입원과 DRG 순으로 점검 범위를 넓혔습니다.</p></article>
+        <article class="time-item"><time>2020.10 이후</time><h3>원내 적용</h3><p>시스템 설정, 의료진 컨퍼런스·교육, 매뉴얼과 검사 프로세스를 적용하였습니다.</p></article>
+        <article class="time-item"><time>2021</time><h3>연중 운영·성과 확인</h3><p>개선 구조가 한 해 동안 적용되었고 청구 데이터와 사용량으로 변화를 확인하였습니다.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="outpatient">
+      <div class="section-head reveal">
+        <p class="eyebrow">01 · Outpatient Claims</p>
+        <h2><span class="title-line">외래 삭감을 개별 오류가 아닌</span><span class="title-line">‘반복되는 구조’로 분석하였습니다</span></h2>
+      </div>
+
+      <article class="card story reveal">
+        <p>우선 심평원 심사결과 통지서를 활용하여 삭감 내역을 확보하고, 행위와 약제를 함께 놓고 반복되는 패턴을 분류하였습니다. 상병 근거가 없는 처방, 인정 횟수를 초과한 행위·검사, 환자의 상태나 급여기준과 맞지 않는 검사처럼 <strong>청구 전에 예방할 수 있는 유형</strong>이 계속 발생하고 있음을 확인하였습니다.</p>
+        <p>그중 시스템으로 방어할 수 있는 문제는 EMR의 상병 자동매칭 기능을 활용하였습니다. 반면 복수 상병 중 진료 상황에 맞는 상병을 의료진이 선택해야 하는 경우에는 단순히 오류 사실만 전달하지 않았습니다. 삭감 사례와 올바른 입력 기준을 정리한 매뉴얼을 만들고, 실제 진료 흐름에서 의료진이 판단할 수 있도록 반복 교육하였습니다.</p>
+        <p>이 과정은 삭감 후 이의신청만 반복하는 방식이 아니라, <strong>시스템 설정과 사용자 행동을 함께 바꾸어 동일한 삭감이 다시 발생하지 않도록 만드는 작업</strong>이었습니다. 또한 행위와 처방 삭감을 따로 보지 않고 전체 외래 삭감으로 통합 관리하여 월평균 약 150건이던 삭감을 약 20건 수준으로 낮추었습니다.</p>
+        <div class="highlight">핵심은 삭감 건을 사후 처리한 것이 아니라, 통지서 분석 → 원인 분류 → 시스템 방어 → 의료진 교육 → 재발 여부 점검의 순환 구조를 만든 것입니다.</div>
+      </article>
+
+      <div class="steps reveal" aria-label="외래 삭감 개선 프로세스">
+        <article class="card step"><span class="step-no">1</span><h3>삭감 내역 확보</h3><p>심평원 통지서에서 행위와 약제 삭감을 함께 추출하고 반복 여부를 확인하였습니다.</p></article>
+        <article class="card step"><span class="step-no">2</span><h3>원인과 책임 구간 분류</h3><p>시스템으로 예방 가능한 오류와 의료진의 임상 판단이 필요한 항목을 구분하였습니다.</p></article>
+        <article class="card step"><span class="step-no">3</span><h3>시스템·매뉴얼 적용</h3><p>상병 자동매칭을 설정하고 복수 상병 선택 기준과 사례 중심의 안내자료를 만들었습니다.</p></article>
+        <article class="card step"><span class="step-no">4</span><h3>교육과 재점검</h3><p>의료진에게 반복 교육한 뒤 통지서를 다시 확인하며 동일 유형의 재발 여부를 관리하였습니다.</p></article>
+      </div>
+
+      <div class="metric-grid reveal">
+        <article class="card metric"><div class="label">월평균 외래 삭감 · 행위+약제</div><div class="value">약 150건 <span class="arrow">→</span><br><em class="no-break">약 20건</em></div><div class="sub">전체 외래 삭감을 같은 기준으로 통합 관리</div></article>
+        <article class="card metric"><div class="label">삭감 건수 감소율</div><div class="value"><em>약 86.7%</em></div><div class="sub">월평균 기준, 약 130건 감소</div></article>
+        <article class="card metric"><div class="label">개선 방식</div><div class="value" style="font-size:1.55rem; line-height:1.35">시스템 + 매뉴얼 + 반복 교육</div><div class="sub">청구 담당자 개인의 사후 보완에 의존하지 않는 구조</div></article>
+      </div>
+
+      <aside class="card example-box reveal">
+        <h3>반복 패턴의 구체적인 예시</h3>
+        <div class="tag-list">
+          <span class="tag">상병 근거가 없는 약제 처방</span>
+          <span class="tag">진료기간 내 동일 처치의 인정 횟수 초과</span>
+          <span class="tag">임신 주수 기준에 맞지 않는 초음파 사용</span>
+          <span class="tag">복수 상병 중 부적절한 상병 선택</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="fee">
+      <div class="section-head fee-head reveal">
+        <p class="eyebrow">02 · Fee Discovery &amp; Policy</p>
+        <h2><span class="title-line">삭감을 줄이는 동시에,</span><span class="title-line">기준상 청구할 수 있지만 놓치던 수가를 찾았습니다</span></h2>
+      </div>
+
+      <div class="split">
+        <article class="card story reveal">
+          <p>청구 손실을 줄이는 것만으로는 개선이 충분하지 않다고 판단하여, 실제 진료가 이루어졌지만 급여기준을 정확히 알지 못해 누락되고 있던 수가를 함께 점검하였습니다. 고위험 임산부초음파, 진단초음파, 비자극검사 등의 고시와 적용기준을 분석하여 추가 사용이 가능한 근거를 정리하였습니다.</p>
+          <p>기준을 확인한 뒤에는 청구팀 내부에서만 보관하지 않고 의료진과 컨퍼런스를 진행하였습니다. 어떤 환자와 진료 상황에 적용할 수 있는지 설명하고 실제 원내 프로세스에 반영하여, 사용할 수 있는데도 놓치는 사례가 반복되지 않도록 하였습니다.</p>
+          <p>신규 고시, 건강보험 시범사업 또는 보건복지부 정책이 발표되면 우리 병원에 적용 가능한지 먼저 검토하였습니다. 해석이 불분명한 내용은 관련 기관에 직접 문의하고, 적용 대상·필요 기록·청구 방법을 정리해 의료진과 실무자에게 전달하였습니다. 이를 통해 정책 분석을 실제 진료와 청구로 연결하는 역할을 수행하였습니다.</p>
+        </article>
+        <article class="card feature-metric reveal">
+          <div>
+            <div class="kicker">고위험 임산부초음파 연간 사용량</div>
+            <div class="numbers"><strong>250 → 319건</strong><span>2019년 대비 2021년 +69건 · +27.6%</span></div>
+          </div>
+          <p>전체 외래 진료비 비교와는 별개의 세부 지표입니다. 급여기준 분석과 원내 적용을 통해 누락 가능성이 있던 항목의 실제 사용량이 증가한 사례로 제시하였습니다.</p>
+        </article>
+      </div>
+
+      <article class="card story reveal" style="margin-top:22px">
+        <p class="eyebrow">Childbirth &amp; Inpatient Fee</p>
+        <p>분만수가에서도 환자의 연령, 분만 시작시간, 실제 분만시간, 분만일의 공휴일·야간 여부 등에 따라 받을 수 있는 수가와 가산이 누락되고 있음을 확인하였습니다.<br>우선 누락 유형과 적용 가능한 사례를 정리한 뒤, <strong>시스템이 자동으로 판단할 수 있는 조건</strong>과 <strong>직원이 기록을 보고 직접 확인해야 하는 조건</strong>을 구분하였습니다.</p>
+        <p>자동화 가능한 항목은 시스템 설정에 반영하고, 사람의 확인이 필요한 항목은 확인 시점과 기준을 담은 업무 매뉴얼로 만들어 전달하였습니다. 이로써 담당자의 기억이나 숙련도에 따라 청구 결과가 달라지지 않도록 분만수가 확인 절차를 표준화하였습니다.</p>
+      </article>
+
+      <div class="steps reveal" aria-label="고시 및 정책 적용 과정">
+        <article class="card step"><span class="step-no">1</span><h3>고시·정책 탐색</h3><p>신규 고시, 시범사업, 보건복지부 정책 중 병원 진료와 연결되는 항목을 찾았습니다.</p></article>
+        <article class="card step"><span class="step-no">2</span><h3>적용요건 해석</h3><p>대상 환자, 인정 횟수, 필요 기록과 증빙을 분석하고 불명확한 내용은 기관에 문의하였습니다.</p></article>
+        <article class="card step"><span class="step-no">3</span><h3>현장 협의</h3><p>의료진 컨퍼런스를 통해 임상 흐름에 적용 가능한지 확인하고 실제 사용 기준을 합의하였습니다.</p></article>
+        <article class="card step"><span class="step-no">4</span><h3>시스템·교육 적용</h3><p>자동화 항목은 시스템에 반영하고, 판단이 필요한 항목은 매뉴얼과 교육으로 표준화하였습니다.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="drg">
+      <div class="section-head reveal">
+        <p class="eyebrow">03 · DRG Improvement</p>
+        <h2><span class="title-line">“같은 수술인데 왜 청구금액이 다를까?”</span><span class="title-line">라는 질문에서 시작한 DRG 개선</span></h2>
+      </div>
+
+      <article class="card story reveal">
+        <p>유사한 수술을 시행했는데도 환자별 청구금액이 달라지는 이유를 확인하는 과정에서 DRG 중증도 번호가 다르다는 점을 발견하였습니다. 이후 중증도를 변경하는 기타진단의 역할을 학습하고, 산과에는 일반적인 DRG 기준 외에 별도로 적용할 수 있는 지침이 있다는 사실을 확인하였습니다. 그중 우리 병원에 적용할 수 있는 항목이 출혈 관련 지침이었습니다.</p>
+        <p>다만 출혈 상병을 청구에 반영하기 위해서는 입원기간 중 혈액검사 결과가 필요했습니다. 당시에는 의료진의 경험상 수술 중 출혈이 많다고 판단한 일부 환자에게만 외부 검사를 의뢰하고 있어, 실제 상태를 객관적으로 확인하고 기타진단의 근거를 남길 구조가 충분하지 않았습니다.</p>
+        <p>이에 원내 혈액검사 장비 도입비용과 장기적인 청구금액 증가 가능성을 비교하였습니다. 수술 후 검사를 루틴화하면 환자의 수술 후 건강상태를 신속하게 확인하는 동시에, 지침에 맞는 진단과 청구 근거도 확보할 수 있다고 판단하였습니다. 현재 프로세스의 한계, 지침의 요건, 장비 도입 이후의 업무 흐름과 기대효과를 정리하여 의료진 컨퍼런스를 진행하였습니다.</p>
+        <p>그 결과 실제 장비 도입으로 이어졌고, 수술 후 검사 → 결과 확인 → 출혈 관련 진단·기록 → DRG 청구가 연결되는 프로세스가 만들어졌습니다. 이후 청구 데이터에서 중증도가 반영된 DRG군의 비중과 건당 청구금액이 증가한 것을 확인하였습니다.</p>
+      </article>
+
+      <div class="drg-flow reveal" aria-label="DRG 개선 흐름">
+        <article class="card"><b>QUESTION</b><h3>금액 차이 발견</h3><p>유사 수술의 환자별 청구금액이 다른 원인을 추적했습니다.</p></article>
+        <article class="card"><b>RULE</b><h3>중증도·지침 분석</h3><p>기타진단과 산과 출혈 관련 DRG 지침을 확인했습니다.</p></article>
+        <article class="card"><b>GAP</b><h3>검사 근거 부족</h3><p>선별적 외주검사만으로는 입원기간 중 객관적 근거 확보가 어려웠습니다.</p></article>
+        <article class="card"><b>ACTION</b><h3>장비 도입·협의</h3><p>임상적 가치와 수익 효과를 비교하고 의료진 컨퍼런스를 진행했습니다.</p></article>
+        <article class="card"><b>RESULT</b><h3>청구 구조 정착</h3><p>검사·진단·기록·청구가 이어지는 표준 프로세스를 만들었습니다.</p></article>
+      </div>
+
+      <div class="card table-card reveal">
+        <div class="table-head"><h3>DRG 개선 전후 비교</h3><p>동일 31건 비교와 개선 구조가 적용된 2021년 특정 월을 함께 제시하였습니다. 병원 내부 재무정보 보호를 위해 금액은 2020년 4월 합계를 100으로 환산한 지수로 표기하였습니다.</p></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>DRG 코드</th><th>2020년 4월 건수</th><th>2020년 4월 청구지수</th><th>2020년 11월 건수</th><th>2020년 11월 청구지수</th><th>2021년 8월 건수</th><th>2021년 8월 청구지수</th></tr></thead>
+            <tbody>
+              <tr><td>O01600</td><td>17건</td><td>54.8</td><td>3건</td><td>9.6</td><td>0건</td><td>0</td></tr>
+              <tr><td>O01601</td><td>10건</td><td>32.3</td><td>8건</td><td>26.4</td><td>8건</td><td>26.7</td></tr>
+              <tr><td>O01602</td><td>3건</td><td>9.8</td><td>18건</td><td>61.5</td><td>16건</td><td>66.3</td></tr>
+              <tr><td>O01603</td><td>1건</td><td>3.1</td><td>2건</td><td>8.0</td><td>2건</td><td>8.3</td></tr>
+              <tr><td>O01701</td><td>0건</td><td>0</td><td>0건</td><td>0</td><td>2건</td><td>7.0</td></tr>
+              <tr class="total"><td>합계</td><td>31건</td><td>100.0</td><td>31건</td><td>105.5</td><td>28건</td><td>108.3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-note">※ 청구지수는 청구자료 기준 금액을 환산한 값이며, 비교 시점의 환자 구성과 세부 진료조건에 따라 차이가 발생할 수 있습니다.</div>
+      </div>
+
+      <div class="metric-grid reveal">
+        <article class="card metric"><div class="label">같은 31건 · 2020.04 → 2020.11</div><div class="value"><em>+5.5%</em></div><div class="sub">총 청구금액 증가율</div></article>
+        <article class="card metric"><div class="label">28건 · 2021.08 vs 31건 · 2020.04</div><div class="value"><em>+8.3%</em></div><div class="sub">3건이 적어도 총 청구금액 증가</div></article>
+        <article class="card metric"><div class="label">건당 평균 청구금액 · 2020.04 → 2021.08</div><div class="value"><em>+19.9%</em></div><div class="sub">건당 평균 청구금액 증가율</div></article>
+      </div>
+
+      <div class="comparison reveal">
+        <article class="card compare-card"><h3>중증도 반영군의 구성 변화</h3><div class="big">4건 → 20건</div><p>O01602 이상 그룹은 2020년 4월 4건에서 2020년 11월 20건으로 증가하였습니다. 단순한 건수 증가가 아니라 환자 상태를 뒷받침하는 검사와 기록이 청구에 반영되도록 구조를 바꾼 결과입니다.</p></article>
+        <article class="card compare-card"><h3>외부 검토를 통한 추가 확인</h3><div class="big" style="font-size:1.55rem;line-height:1.35">입원 청구에서 추가 개선사항 없음</div><p>이후 외부 청구 컨설팅 업체가 입원 청구를 검토했으나 추가로 조정할 항목이 없다는 의견을 받았습니다. 이는 내부에서 구축한 입원·DRG 청구 구조가 이미 높은 수준으로 정비되어 있었음을 보여주는 보조 근거입니다.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="result">
+      <div class="section-head reveal">
+        <p class="eyebrow">04 · Integrated Result</p>
+        <h2><span class="title-line">진료건수는 감소했지만,</span><span class="title-line">총진료비와 건당 진료비는 증가하였습니다</span></h2>
+        <p>2019년은 개선 전 기준 시점이고, 2020년은 약 6개월간 외래부터 DRG까지 개선을 설계·적용한 전환기였습니다. 2021년은 정비한 기준이 연중 온전히 적용된 첫해이므로, 기관 전체의 변화를 확인하는 비교 구간으로 활용하였습니다.</p>
+      </div>
+
+      <div class="metric-grid reveal">
+        <article class="card metric"><div class="label">총 진료건수 · 2019 → 2021</div><div class="value">61,862건 <span class="arrow">→</span><br><em class="no-break">46,620건</em></div><div class="sub">15,242건 감소 · −24.6%</div></article>
+        <article class="card metric"><div class="label">총진료비 · 2019 → 2021</div><div class="value"><em>+11.3%</em></div><div class="sub">총진료비 증가율 · 금액 비공개</div></article>
+        <article class="card metric"><div class="label">건당 평균 진료비 · 2019 → 2021</div><div class="value"><em>+47.7%</em></div><div class="sub">건당 평균 진료비 증가율 · 금액 비공개</div></article>
+      </div>
+
+      <div class="card annual-bars reveal" aria-label="2019년과 2021년 변화">
+        <div class="bar-row"><div class="bar-label">총 진료건수</div><div class="track"><div class="fill alt" style="width:75.4%"></div></div><div class="bar-value">−24.6%</div></div>
+        <div class="bar-row"><div class="bar-label">총진료비</div><div class="track"><div class="fill" style="width:84%"></div></div><div class="bar-value">+11.3%</div></div>
+        <div class="bar-row"><div class="bar-label">건당 평균 진료비</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="bar-value">+47.7%</div></div>
+      </div>
+
+      <aside class="analysis-note reveal">
+        <h3>데이터 해석</h3>
+        <p>총진료비에는 연도별 수가 인상, 환자 구성과 진료 내용의 변화 등도 함께 영향을 미치므로 증가분 전부를 개선 활동의 단독 성과로 보기는 어렵습니다. 다만 진료건수가 24.6% 감소한 상황에서도 총진료비가 11.3% 증가했고, 같은 건수의 DRG 비교와 고위험 임산부초음파 사용량 등 세부 지표에서도 변화가 확인됩니다. 따라서 외래 삭감 방어, 누락 수가 발굴, 분만수가 점검과 DRG 프로세스 개선이 청구 구조의 질적 개선에 기여한 것으로 판단할 수 있습니다.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="duties">
+      <div class="section-head reveal">
+        <p class="eyebrow">05 · Full Scope of Work</p>
+        <h2><span class="title-line">고시와 정책을 해석하고,</span><span class="title-line">진료행정과 외부기관 업무까지 연결하였습니다</span></h2>
+        <p>앞선 섹션의 청구 개선 성과와 중복되지 않도록, 예진산부인과에서 수행한 업무를 고시·정책 분석 및 교육과 진료행정 지원의 두 영역으로 정리하였습니다. 또한 업무 과정에서 직접 소통한 기관과 협업 내용을 함께 제시하였습니다.</p>
+      </div>
+
+      <div class="duty-grid reveal">
+        <article class="card duty"><h3>고시·정책 분석 및 교육</h3><ul><li>신규 고시, 건강보험 시범사업과 보건복지부 정책이 발표되면 병원의 환자군과 진료 흐름에 적용할 수 있는지 검토하였습니다.</li><li>문서만으로 판단하기 어려운 사항은 심평원, 보건복지부 등 관련 기관에 문의하여 적용대상, 인정기준, 필요 기록과 청구방법을 확인하였습니다.</li><li>확인한 내용을 의료진과 실무자가 실제 진료 과정에서 사용할 수 있도록 사례와 업무 흐름 중심으로 다시 정리하였습니다.</li><li>의료진 컨퍼런스와 반복 교육을 진행하고, 시스템 설정과 업무 매뉴얼에 반영하여 고시의 내용이 실제 진료·기록·청구로 이어지도록 하였습니다.</li></ul></article>
+        <article class="card duty"><h3>진료행정 지원</h3><ul><li>심평원 진료의뢰·회송 중계시스템을 이용하여 산부인과 환자의 진료의뢰와 회송 업무를 처리하고 관련 수가를 확인하였습니다.</li><li>난임 시술 환자의 진료기록을 확인하여 지원금을 신청하고 관련 증빙서류를 제출하였습니다. 환자에게 제도를 설명하는 업무는 담당하지 않았습니다.</li><li>자동차보험 환자의 접수, 보험정보 확인과 진료비 청구 관련 행정업무를 수행하였습니다.</li><li>환자 자격조회와 보험정보 확인, 공단·보건소·수탁검사기관 관련 행정업무를 처리하였습니다.</li><li>심평원 치료재료 등록과 마약류 취급내역 신고를 보조 업무로 수행하였습니다.</li></ul></article>
+      </div>
+
+      <h3 class="agency-title reveal">업무 과정에서 소통한 외부기관</h3>
+      <div class="agency-grid reveal">
+        <article class="card agency"><strong>건강보험심사평가원</strong><p>심사결과 통지서 확인, 고시·급여기준 문의, 진료의뢰·회송 중계시스템 이용, 치료재료 등록과 청구 관련 업무를 수행하였습니다.</p></article>
+        <article class="card agency"><strong>보건복지부 및 정책 관련 기관</strong><p>신규 정책과 시범사업의 적용 가능성을 검토하고, 문서만으로 판단하기 어려운 적용조건과 운영방법을 확인하였습니다.</p></article>
+        <article class="card agency"><strong>국민건강보험공단</strong><p>환자의 보험자격과 적용정보를 확인하고 건강보험 관련 행정업무와 필요한 후속 처리를 진행하였습니다.</p></article>
+        <article class="card agency"><strong>보건소</strong><p>난임지원금 신청을 위해 진료기록과 대상 여부를 확인하고 증빙서류 제출 및 관련 행정업무를 수행하였습니다.</p></article>
+        <article class="card agency"><strong>자동차보험 관련 기관</strong><p>자동차보험 환자의 보험정보를 확인하고 진료비 청구와 관련된 행정절차를 처리하였습니다.</p></article>
+        <article class="card agency"><strong>수탁검사기관 및 신고 시스템</strong><p>외부 수탁검사 관련 행정업무를 처리하고, 마약류 취급내역 신고 등 기관포털을 이용한 보조 업무를 수행하였습니다.</p></article>
+      </div>
+    </section>
+
+    <section class="section card closing reveal">
+      <p class="eyebrow" style="color:#9be5d7">Core Competency</p>
+      <h2>고시를 읽는 데서 끝나지 않고,<br>현장에서 작동하는 프로세스로 바꾸었습니다.</h2>
+      <p>심사결과와 고시에서 문제와 기회를 찾고, 데이터로 필요성을 설명하며, 의료진·실무자·시스템 담당자와 협의하여 실제 업무 흐름에 정착시키는 것이 저의 강점입니다. 예진산부인과에서는 외래 삭감 관리부터 수가 발굴, 분만수가와 DRG 개선, 정책 적용과 기관포털 실무까지 하나의 연결된 청구 체계로 관리하였습니다.</p>
+    </section>
+    <nav class="page-links" aria-label="상세 경력 이동"><a href="index.html">← 포트폴리오 홈</a><a href="hansarang-career-portfolio.html">다음 경력 · 한사랑병원 →</a></nav>
+  </main>
+
+  <footer>예진산부인과 경력 상세 포트폴리오 · 면접 제출용</footer>
+
+  <script>
+    const revealItems = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealItems.forEach((item) => observer.observe(item));
+
+  </script>
+</body>
+</html>

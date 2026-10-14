@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="트라이업 고객지원·제품기획·QA와 의료급여 진료지원 기능 설계·검증 경력 포트폴리오">
+  <title>트라이업 경력 포트폴리오</title>
+  <style>
+    :root{
+      --ink:#2b2028;--soft:#6d5a65;--plum:#5c2a48;--deep:#3c2035;--rose:#a84867;
+      --coral:#d96f62;--peach:#f3c5b8;--cream:#fff7f3;--blush:#f8e9e7;--paper:#fff;
+      --bg:#faf6f5;--line:#eadedc;--gold:#b8864f;--shadow:0 18px 48px rgba(83,41,64,.10);
+      --radius:22px;--max:1120px
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);background:var(--bg);font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.78;letter-spacing:-.015em;word-break:keep-all;overflow-wrap:break-word}
+    .shell{width:min(calc(100% - 40px),var(--max));margin-inline:auto}
+    .topbar{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(234,222,220,.92);background:rgba(255,252,250,.94);backdrop-filter:blur(14px)}
+    .topbar-inner{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{color:var(--plum);font-weight:950;text-decoration:none;white-space:nowrap}
+    .tabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs a{padding:8px 10px;border-radius:999px;color:var(--soft);font-size:.83rem;font-weight:800;text-decoration:none;white-space:nowrap}.tabs a:hover,.tabs a.active{color:var(--rose);background:var(--blush)}
+    .print{padding:8px 13px;border:1px solid var(--line);border-radius:999px;color:var(--plum);background:#fff;font-weight:850;cursor:pointer}
+    .hero{position:relative;min-height:690px;display:grid;align-items:center;overflow:hidden;color:#fff;background:radial-gradient(circle at 78% 18%,rgba(229,128,115,.36),transparent 35%),linear-gradient(135deg,#362033,#642b4d 58%,#9e465f)}
+    .hero::before{content:"";position:absolute;top:-150px;right:-80px;width:520px;height:520px;border:1px solid rgba(255,255,255,.14);border-radius:46% 54% 60% 40%/52% 42% 58% 48%;transform:rotate(18deg)}
+    .hero::after{content:"";position:absolute;right:90px;bottom:-230px;width:520px;height:520px;border-radius:50%;background:rgba(255,255,255,.035);box-shadow:0 0 0 74px rgba(255,255,255,.027),0 0 0 148px rgba(255,255,255,.018)}
+    .hero-inner{position:relative;z-index:1;padding:90px 0 78px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;color:var(--rose);font-size:.78rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+    .eyebrow::before{content:"";width:28px;height:2px;background:currentColor}
+    .hero .eyebrow{color:#f5b8ae}
+    .hero h1{max-width:1050px;margin:0;font-size:clamp(2.55rem,5.3vw,4.8rem);line-height:1.09;letter-spacing:-.055em}
+    .hero h1 span{display:block;margin-top:13px;color:#f4b9b1;font-size:.71em}
+    .hero-lead{max-width:860px;margin:28px 0 0;color:rgba(255,255,255,.84);font-size:1.08rem}
+    .hero-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:44px}
+    .hero-meta div{min-width:0;padding:17px 18px;border:1px solid rgba(255,255,255,.16);border-radius:16px;background:rgba(255,255,255,.075)}
+    .hero-meta small{display:block;color:rgba(255,255,255,.6);font-weight:750}
+    .hero-meta strong{display:block;margin-top:3px}
+    main{padding:46px 0 88px}
+    .section{padding:54px 0}
+    .section+.section{border-top:1px solid var(--line)}
+    .section-head{max-width:1040px;margin-bottom:27px}
+    .section-head h2{margin:0;font-size:clamp(2rem,3.4vw,2.55rem);line-height:1.22;letter-spacing:-.042em}
+    .title-line{display:block;white-space:nowrap}
+    .section-head>p:last-child{margin:18px 0 0;color:var(--soft);font-size:1.03rem}
+    .card{border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);box-shadow:var(--shadow)}
+    .story{padding:31px 34px}
+    .story p{margin:0;color:#4e3e47}
+    .story p+p{margin-top:17px}
+    .story strong{color:var(--plum)}
+    .highlight{margin-top:24px;padding:20px 22px;border-left:4px solid var(--coral);border-radius:0 14px 14px 0;color:#563143;background:var(--blush);font-weight:850}
+    .timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));overflow:hidden;margin-top:18px}
+    .time{padding:24px 20px;border-right:1px solid var(--line)}
+    .time:last-child{border-right:0}
+    .time b{color:var(--rose);font-size:.73rem;letter-spacing:.11em}
+    .time h3{margin:7px 0 8px;font-size:1rem}
+    .time p{margin:0;color:var(--soft);font-size:.88rem;line-height:1.62}
+    .scope-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+    .scope{padding:26px}
+    .scope-no{display:flex;width:35px;height:35px;align-items:center;justify-content:center;border-radius:12px;color:#fff;background:linear-gradient(135deg,var(--plum),var(--coral));font-size:.78rem;font-weight:900}
+    .scope h3{margin:16px 0 8px;font-size:1.1rem}
+    .scope p{margin:0;color:var(--soft);font-size:.92rem}
+    .problem-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);gap:18px}
+    .problem-card{padding:30px 32px}
+    .problem-card h3{margin:0 0 14px;color:var(--plum);font-size:1.26rem}
+    .problem-card p{margin:0;color:#4e3e47}
+    .problem-card p+p{margin-top:15px}
+    .before{padding:30px;color:#fff;background:linear-gradient(145deg,#43233a,#7b3558)}
+    .before small{display:block;color:#f5b8ae;font-weight:900;letter-spacing:.1em}
+    .before strong{display:block;margin:12px 0 17px;font-size:1.45rem;line-height:1.38}
+    .before ul{margin:0;padding-left:20px;color:rgba(255,255,255,.8)}
+    .before li+li{margin-top:9px}
+    .flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:18px}
+    .flow-step{position:relative;padding:24px 21px;border:1px solid var(--line);border-radius:18px;background:#fff}
+    .flow-step b{display:block;color:var(--coral);font-size:.75rem;letter-spacing:.1em}
+    .flow-step h3{margin:8px 0 8px;font-size:1.06rem}
+    .flow-step p{margin:0;color:var(--soft);font-size:.89rem}
+    .flow-step:not(:last-child)::after{content:"→";position:absolute;top:50%;right:-13px;z-index:2;width:26px;height:26px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:var(--rose);background:#fff;font-weight:900;transform:translateY(-50%)}
+    .definition-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+    .definition{padding:28px 30px}
+    .definition h3{margin:0 0 13px;color:var(--plum);font-size:1.18rem}
+    .definition p{margin:0;color:var(--soft)}
+    .definition ul{margin:14px 0 0;padding-left:20px;color:#4e3e47}
+    .definition li+li{margin-top:8px}
+    .case{display:grid;grid-template-columns:210px minmax(0,1fr);overflow:hidden}
+    .case-title{padding:28px 25px;color:#fff;background:linear-gradient(150deg,#4a263e,#a74763)}
+    .case-title b{display:block;color:#f7c1b8;font-size:.73rem;letter-spacing:.12em}
+    .case-title h3{margin:10px 0 0;font-size:1.22rem;line-height:1.43}
+    .case-body{padding:29px 32px}
+    .case-body p{margin:0;color:#4e3e47}
+    .case-body p+p{margin-top:14px}
+    .case-result{color:var(--plum)!important;font-weight:850}
+    .qa-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:18px}
+    .qa{padding:25px}
+    .qa small{color:var(--coral);font-weight:900;letter-spacing:.08em}
+    .qa h3{margin:8px 0 8px;font-size:1.1rem}
+    .qa p{margin:0;color:var(--soft);font-size:.91rem}
+    .agency-title{margin:31px 0 14px;font-size:1.18rem}
+    .agency-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+    .agency{padding:23px}
+    .agency strong{color:var(--plum)}
+    .agency p{margin:8px 0 0;color:var(--soft);font-size:.91rem}
+    .closing{margin-top:30px;padding:35px 38px;color:#fff;background:linear-gradient(135deg,#402238,#783552 62%,#a94b61)}
+    .closing .eyebrow{color:#f5b8ae}
+    .closing h2{margin:0;font-size:clamp(1.7rem,3vw,2.45rem);line-height:1.36}
+    .closing p{max-width:880px;margin:16px 0 0;color:rgba(255,255,255,.8)}
+    .page-links{display:flex;justify-content:space-between;gap:12px;margin-top:24px}.page-links a{padding:11px 16px;border:1px solid var(--line);border-radius:999px;color:var(--plum);background:#fff;font-weight:850;text-decoration:none}
+    footer{padding:28px 0 48px;color:var(--soft);font-size:.86rem;text-align:center}
+    @media(max-width:920px){.topbar-inner{flex-wrap:wrap;padding:10px 0}.tabs{order:3;width:100%}.hero{min-height:auto}.hero-meta,.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}.timeline .time{border-bottom:1px solid var(--line)}.scope-grid,.flow{grid-template-columns:1fr 1fr}.problem-grid{grid-template-columns:1fr}.title-line{white-space:normal}.flow-step::after{display:none}}
+    @media(max-width:660px){.shell{width:min(calc(100% - 28px),var(--max))}.hero-inner{padding:70px 0 62px}.hero h1{font-size:2.5rem}.hero-meta,.scope-grid,.flow,.definition-grid,.qa-grid,.agency-grid{grid-template-columns:1fr}.story,.problem-card,.before{padding:25px 23px}.case{grid-template-columns:1fr}.case-title,.case-body{padding:23px}.section{padding:42px 0}.section-head h2{font-size:2rem}.print{font-size:.78rem}.page-links{align-items:stretch;flex-direction:column}.page-links a{text-align:center}}
+    @media print{.topbar,.print,.page-links{display:none}.hero{min-height:auto;print-color-adjust:exact;-webkit-print-color-adjust:exact}.hero-inner{padding:52px 0}.section{break-inside:avoid;padding:34px 0}.card{box-shadow:none}.scope,.flow-step,.definition,.qa,.agency{break-inside:avoid}main{padding-bottom:20px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="index.html">이형준 · Career Portfolio</a>
+      <nav class="tabs" aria-label="경력 페이지"><a href="index.html">HOME</a><a href="yejin-career-portfolio.html">예진산부인과</a><a href="hansarang-career-portfolio.html">한사랑병원</a><a href="neosoft-career-portfolio.html">네오소프트뱅크</a><a class="active" href="tryup-career-portfolio.html">트라이업</a></nav>
+      <button class="print" type="button" onclick="window.print()">PDF로 저장</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="shell hero-inner">
+      <p class="eyebrow">Healthcare Product Planning &amp; QA</p>
+      <h1>트라이업<span>수개월간 멈춰 있던 의료급여 기능을 업무분석부터 실환경 검증까지 구체화하였습니다</span></h1>
+      <p class="hero-lead">비급여 피부·미용 시장에 특화된 CRM을 중심으로, 접수와 진료를 지원하는 EMR 기능이 결합된 서비스에서 고객지원, 사용자 교육, 오류점검과 문서화를 담당하였습니다. 신규 의료기관의 오픈 현장과 학회 부스행사에도 참여하여 실제 운영과 현장 응대를 지원하였습니다. 병원 원무와 청구 경험을 바탕으로 제품에 없던 의료급여 환자 진료지원 기능의 업무 흐름을 설계하고, 기능·화면 정의와 QA 문서 작성, 테스트 병원 섭외 및 실환경 검증까지 수행하였습니다.</p>
+      <div class="hero-meta">
+        <div><small>근무기간</small><strong>2025.04–2026.05</strong></div>
+        <div><small>직무</small><strong>고객지원 · 제품기획 지원 · QA</strong></div>
+        <div><small>제품 구조</small><strong>피부미용 CRM 중심 · EMR 보조</strong></div>
+        <div><small>대표과제</small><strong>의료급여 진료지원 기능 신규 기획</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="shell">
+    <section class="section" id="overview">
+      <div class="section-head">
+        <p class="eyebrow">Project Overview</p>
+        <h2><span class="title-line">현장경험으로 업무의 기본 구조를 세우고,</span><span class="title-line">제품에 없던 의료급여 기능을 실제 사용 단계까지 연결했습니다</span></h2>
+        <p>도입을 검토하던 병원의 요구가 있었지만 의료급여 업무를 아는 내부 인력이 없어 기능 개발과 병원 도입이 수개월간 진행되지 못하고 있었습니다.</p>
+      </div>
+      <article class="card story">
+        <p>제품의 중심은 비급여 피부·미용 의료기관의 고객관리를 위한 CRM이었으며, EMR은 접수와 진료업무를 지원하는 보조 기능에 가까웠습니다. 건강보험 환자의 자격정보는 조회할 수 있었지만 의료급여 환자는 대상 여부만 확인하는 수준이었고, 자격조회 이후 접수, 진료, 진료확인번호 처리, 건강생활유지비 사용, 수납과 청구를 연결하는 기능은 마련되어 있지 않았습니다.</p>
+        <p>제품 도입을 검토하던 의료기관은 의료급여 환자의 접수·수납·청구까지 처리할 수 있어야 한다고 요청하였습니다. 그러나 회사 안에는 해당 제도와 병원 업무를 아는 인력이 없어 요구사항이 구체화되지 못했고, 병원 도입도 수개월간 지연되고 있었습니다.</p>
+        <p>병원 원무와 청구 경험을 바탕으로 의료급여 환자가 내원한 시점부터 청구 전까지 필요한 전체 업무를 정리하였습니다. 공개된 자격조회 API 자료와 요양기관정보마당의 실제 처리방식을 확인하고, 사용자 화면과 기능 동작, 예외상황과 테스트 방법을 문서로 구체화하였습니다.</p>
+        <div class="highlight">단순히 기능을 제안한 것이 아니라, 제도 확인부터 업무 흐름·화면·예외조건·QA·실환경 검증까지 제품이 실제로 사용되기 위한 전체 과정을 담당하였습니다.</div>
+      </article>
+      <div class="card timeline">
+        <article class="time"><b>DISCOVER</b><h3>문제 확인</h3><p>병원 도입을 막고 있던 의료급여 처리 공백과 내부 지식 부족을 확인하였습니다.</p></article>
+        <article class="time"><b>RESEARCH</b><h3>제도 분석</h3><p>공개 API 문서와 기관 시스템에서 자격조회 및 승인 처리기준을 확인하였습니다.</p></article>
+        <article class="time"><b>DEFINE</b><h3>기능·화면 정의</h3><p>업무 흐름, 사용자 노출정보, 상태별 동작과 예외조건을 문서화하였습니다.</p></article>
+        <article class="time"><b>TEST</b><h3>QA 설계</h3><p>정상·오류·취소·재승인 상황을 포함한 테스트 시나리오를 작성하였습니다.</p></article>
+        <article class="time"><b>VALIDATE</b><h3>실환경 검증</h3><p>테스트 병원을 직접 섭외하고 실제 의료기관 환경에서 기능을 확인하였습니다.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="support">
+      <div class="section-head">
+        <p class="eyebrow">01 · Service Operations</p>
+        <h2><span class="title-line">사용자 교육과 오류 대응을 수행하고,</span><span class="title-line">반복되는 문의를 제품과 문서의 개선으로 연결했습니다</span></h2>
+      </div>
+      <div class="scope-grid">
+        <article class="card scope"><span class="scope-no">01</span><h3>고객지원</h3><p>전화, 원격과 채널톡을 통해 사용자의 기능 문의에 답하고 실제 환경의 오류를 진단하였습니다.</p></article>
+        <article class="card scope"><span class="scope-no">02</span><h3>사용자 교육</h3><p>신규 고객의 초기 설정을 지원하고, 접수부터 진료와 수납까지 기능별 사용방법을 교육하였습니다.</p></article>
+        <article class="card scope"><span class="scope-no">03</span><h3>오픈 현장지원</h3><p>신규 의료기관의 오픈 현장에 방문하여 실제 접수·진료·수납 흐름을 확인하고 문의와 오류에 대응하였습니다.</p></article>
+        <article class="card scope"><span class="scope-no">04</span><h3>학회 부스지원</h3><p>학회 부스행사에 참여하여 부스 운영과 방문자 현장 응대를 지원하였습니다.</p></article>
+        <article class="card scope"><span class="scope-no">05</span><h3>요구사항 전달</h3><p>사용자의 요청을 업무 흐름, 조건과 기대결과로 정리하여 개발팀이 검토할 수 있도록 전달하였습니다.</p></article>
+        <article class="card scope"><span class="scope-no">06</span><h3>매뉴얼·FAQ</h3><p>반복 문의와 업데이트 기능을 FAQ, 사용자 매뉴얼과 가이드로 작성하고 지속적으로 갱신하였습니다.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="problem">
+      <div class="section-head">
+        <p class="eyebrow">02 · Problem Definition</p>
+        <h2><span class="title-line">‘의료급여 환자도 처리되게 해 달라’는 요구를,</span><span class="title-line">개발 가능한 전체 업무 흐름으로 구체화하였습니다</span></h2>
+      </div>
+      <div class="problem-grid">
+        <article class="card problem-card">
+          <h3>도입이 지연된 이유</h3>
+          <p>병원이 원한 것은 단순히 자격조회 화면에 의료급여 여부를 표시하는 기능이 아니었습니다. 의료급여 환자를 접수하고 진료기록을 작성한 뒤 진료확인번호를 처리하고, 건강생활유지비를 사용하여 수납과 청구까지 이어갈 수 있어야 했습니다.</p>
+          <p>기존 제품은 비급여 피부·미용 CRM에 특화되어 있었고 EMR 기능은 보조적인 범위로 구성되어 있었습니다. 건강보험 자격조회는 가능했지만 의료급여는 대상 여부만 확인하고 있었으며, 회사 내부에도 의료급여 환자의 실제 원무·청구 흐름을 설명할 인력이 없었습니다. 이 때문에 요구가 접수된 뒤에도 개발범위와 화면동작을 정하지 못한 상태였습니다.</p>
+          <p>저는 병원에서 수행했던 원무와 청구 경험을 바탕으로 먼저 업무의 기본 틀을 잡고, 제도 자료와 외부 시스템을 확인하면서 기능요건을 단계적으로 구체화하였습니다.</p>
+        </article>
+        <aside class="card before">
+          <small>BEFORE</small>
+          <strong>의료급여 여부만 확인하고<br>후속 업무는 처리할 수 없는 상태</strong>
+          <ul>
+            <li>상세 자격정보 부족</li>
+            <li>진료확인번호 처리기능 부재</li>
+            <li>건강생활유지비 사용 불가</li>
+            <li>접수·진료·수납·청구 연결 부재</li>
+            <li>요구사항을 정의할 내부 경험 부족</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="section-head">
+        <p class="eyebrow">03 · Policy &amp; Workflow Analysis</p>
+        <h2><span class="title-line">자격조회 API와 기관 시스템을 확인하고,</span><span class="title-line">접수부터 수납·청구까지 끊기지 않는 흐름을 설계했습니다</span></h2>
+        <p>의료급여 업무의 처리순서와 건강보험 자격조회와는 다른 예외상황을 먼저 정리한 뒤, CRM 중심의 기존 제품에 추가해야 할 데이터와 EMR 기능을 도출하였습니다.</p>
+      </div>
+      <article class="card story">
+        <p>심평원에 공개된 자격조회 API 문서를 찾아 의료급여 자격조회 시 전달되는 항목과 응답구조를 확인하였습니다. 제품이 기존에 사용하던 건강보험 조회방식과 비교하여 의료급여 환자에게 추가로 필요한 정보와 처리범위를 정리하였습니다.</p>
+        <p>요양기관정보마당에서는 정상 자격조회뿐 아니라 오류가 발생했을 때 어떤 정보와 상태가 반환되는지 확인하였습니다. 진료확인번호의 승인·취소·재승인 처리와 건강생활유지비의 조회 및 사용방식도 실제 업무 순서에 맞춰 분석하였습니다.</p>
+        <p>확인한 내용을 바탕으로 의료급여 자격조회, 접수, 진료기록 작성, 진료확인번호 처리, 건강생활유지비 사용, 수납과 청구가 하나의 환자정보를 기준으로 이어지도록 전체 기능 흐름을 설계하였습니다.</p>
+      </article>
+      <div class="flow">
+        <article class="flow-step"><b>STEP 01</b><h3>자격조회</h3><p>의료급여 종별과 기관정보 등 접수에 필요한 자격정보 확인</p></article>
+        <article class="flow-step"><b>STEP 02</b><h3>접수·진료</h3><p>조회된 의료급여 정보를 접수와 진료기록에 연결</p></article>
+        <article class="flow-step"><b>STEP 03</b><h3>진료확인번호</h3><p>승인·취소·재승인에 따른 번호와 상태 변경 처리</p></article>
+        <article class="flow-step"><b>STEP 04</b><h3>수납·청구</h3><p>건강생활유지비 사용과 환자부담금 및 청구정보 반영</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="definition">
+      <div class="section-head">
+        <p class="eyebrow">04 · Feature &amp; Screen Definition</p>
+        <h2><span class="title-line">기능이 있다는 수준을 넘어,</span><span class="title-line">사용자에게 무엇을 보여주고 어떻게 동작할지 정의했습니다</span></h2>
+      </div>
+      <div class="definition-grid">
+        <article class="card definition">
+          <h3>기능 정의</h3>
+          <p>업무 단계마다 필요한 데이터와 기능이 이어지도록 처리조건을 정리하였습니다.</p>
+          <ul>
+            <li>의료급여 자격조회와 환자 접수 연결</li>
+            <li>진료기록 작성 후 진료확인번호 승인</li>
+            <li>승인 취소와 재승인 처리</li>
+            <li>건강생활유지비 조회와 사용</li>
+            <li>수납과 청구에 필요한 정보 전달</li>
+          </ul>
+        </article>
+        <article class="card definition">
+          <h3>사용자 화면 정의</h3>
+          <p>조회 결과를 그대로 노출하지 않고 실제 사용자가 판단하고 처리하는 데 필요한 정보만 구분하였습니다.</p>
+          <ul>
+            <li>화면에 보여줄 정보와 감출 정보 구분</li>
+            <li>정상 조회와 오류응답의 상태 표시</li>
+            <li>승인·취소·재승인 버튼과 동작조건</li>
+            <li>건강생활유지비 사용 전후 화면상태</li>
+            <li>접수·진료·수납 화면의 정보 연계</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="qa">
+      <div class="section-head">
+        <p class="eyebrow">05 · QA &amp; Field Validation</p>
+        <h2><span class="title-line">테스트 기준을 직접 작성하고,</span><span class="title-line">실제 의료기관을 섭외해 현장에서 기능을 검증했습니다</span></h2>
+      </div>
+      <article class="card case">
+        <div class="case-title"><b>FROM DEFINITION TO FIELD</b><h3>문서에서 끝내지 않은 실환경 검증</h3></div>
+        <div class="case-body">
+          <p>정상 처리와 예외상황을 구분하여 의료급여 자격조회, 오류응답, 진료확인번호 승인상태와 건강생활유지비 사용에 대한 테스트 시나리오를 작성하였습니다. 개발된 기능이 정의한 내용과 다르게 작동하는 부분은 화면과 조건별로 정리하여 수정결과를 다시 확인하였습니다.</p>
+          <p>의료급여 기능은 실제 자격정보와 기관환경에서 확인해야 하는 항목이 있었기 때문에 테스트에 참여할 의료기관을 직접 섭외하였습니다. 해당 병원에서 자격조회와 후속 기능을 검증하고, 실환경에서 확인된 문제를 개발팀에 전달하여 개선하였습니다.</p>
+          <p class="case-result">수개월간 구체화되지 못했던 요구를 제도분석, 기능·화면 정의, QA 문서, 테스트 병원 섭외와 실환경 검증까지 이어지는 실행과제로 전환하였습니다.</p>
+        </div>
+      </article>
+      <div class="qa-grid">
+        <article class="card qa"><small>QA 01</small><h3>정상 흐름</h3><p>자격조회부터 승인, 건강생활유지비 사용과 수납까지 전체 처리결과를 확인하였습니다.</p></article>
+        <article class="card qa"><small>QA 02</small><h3>예외 흐름</h3><p>조회 실패, 오류응답, 승인 취소와 재승인 등 상태별 화면과 동작을 검증하였습니다.</p></article>
+        <article class="card qa"><small>QA 03</small><h3>실환경 검증</h3><p>테스트 병원을 직접 섭외하고 실제 기관정보와 사용자 업무에서 기능을 확인하였습니다.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="additional">
+      <div class="section-head">
+        <p class="eyebrow">06 · Additional Product Work</p>
+        <h2><span class="title-line">의료급여 기능 외에도 현장경험을 활용해,</span><span class="title-line">진료기록과 마약류 관련 기능의 개선에 참여했습니다</span></h2>
+      </div>
+      <div class="agency-grid">
+        <article class="card agency"><strong>진료실 진료기록 고도화</strong><p>의료진이 실제로 진료기록을 작성하는 순서와 사용성을 검토하고 기능 고도화 기획에 참여하였습니다.</p></article>
+        <article class="card agency"><strong>마약류 기능 개선</strong><p>의료기관에서 마약류 관련 업무를 처리하는 과정과 현장 요구사항을 분석하여 개선 기획에 참여하였습니다.</p></article>
+        <article class="card agency"><strong>사용자 문서 업데이트</strong><p>신규·개선 기능을 사용자가 실제 업무에 적용할 수 있도록 FAQ, 매뉴얼과 안내자료를 작성하고 갱신하였습니다.</p></article>
+      </div>
+    </section>
+
+    <section class="card closing">
+      <p class="eyebrow">Core Contribution</p>
+      <h2>병원 업무를 아는 사람이 없어서 멈춰 있던 요구를,<br>개발하고 검증할 수 있는 제품 과제로 전환하였습니다.</h2>
+      <p>원무와 청구 경험을 바탕으로 의료급여 제도를 제품의 데이터와 화면, 기능 흐름으로 바꾸었습니다. 사용자 요구를 전달하는 데 그치지 않고 기능정의서와 화면 정의, QA 시나리오, 테스트 기관 섭외와 실환경 검증까지 수행하며 현장과 개발을 연결하였습니다.</p>
+    </section>
+    <nav class="page-links" aria-label="상세 경력 이동"><a href="neosoft-career-portfolio.html">← 이전 경력 · 네오소프트뱅크</a><a href="index.html">포트폴리오 홈 →</a></nav>
+  </main>
+
+  <footer><div class="shell">이형준 경력 포트폴리오 · 트라이업</div></footer>
+</body>
+</html>
