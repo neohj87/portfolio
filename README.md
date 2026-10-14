@@ -4,7 +4,7 @@
 
 ## 바로가기
 
-- [포트폴리오 메인](https://neohj87.github.io/portfolio/)
+- [포트폴리오 메인](https://neohj87.github.io/portfolio/) - 인적정보 및 학력, 교육사항, 자격증정보 확인
 - [예진산부인과 경력](https://neohj87.github.io/portfolio/yejin-career-portfolio.html) — 원무 및 심사청구, 외래 삭감 분석과 산과 DRG 청구 프로세스 개선
 - [한사랑병원 경력](https://neohj87.github.io/portfolio/hansarang-career-portfolio.html) — 진료지원 및 병원행정 운영, 60병상 병원의 클라우드 EMR 전환
 - [네오소프트뱅크 경력](https://neohj87.github.io/portfolio/neosoft-career-portfolio.html) — EMR 고객지원과 제품 테스트, PACS·진단검사 연동 장애 분석
